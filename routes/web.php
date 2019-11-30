@@ -71,4 +71,45 @@ $router->get('/validador/validarDocumento/{token}', function ($token) {
 return true;
 });
 
+// $router->get('/', function () use ($router) {
+//     return $router->app->version();
+// });
+
+// $router->get('/', function(){
+//     return ' Delmison ';
+// });
+
+// $router->get('/validar/{chave}',function($chave){
+//     if($chave == "mestre"){
+//         return'{status:true}';
+//     }
+//     return'{status:false}';
+// });
+
+// $router->get('/imc/{altura}/{peso}',function($altura,$peso){
+//     $alturaQ = ($altura/100) * ($altura/100);
+//     $imc = $peso/$alturaQ;
+//     $observacao = "Ta bom";
+//     if($imc <= 20) {
+//         $observacao = "visite sua vó";
+//     }
+//     if($imc >= 30) {
+//         $observacao = "não visite sua vó";
+//     }
+//     $resultado = (object) [
+//         'imc' => $imc,
+//         'observacao' => $observacao
+//     ];
+//     return json_encode($resultado);
+// });
+
+$router->get('/evento/{filtro}/{valor}',function($filro,$valor){
+    return'status:true';
+});
+
+$router->get('/evento/visulizar/{codigoEvento}',function($codigoEvento){
+    return 'status:true';
+}); 
+
+$router->get('/participante/inscricao/{codigoParticipante}/{codigoAtividade}',function($altura,$peso){
 
