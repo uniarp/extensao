@@ -113,3 +113,94 @@ $router->get('/evento/visulizar/{codigoEvento}',function($codigoEvento){
 
 $router->get('/participante/inscricao/{codigoParticipante}/{codigoAtividade}',function($altura,$peso){
 
+$router->get('/', function () {
+    return 'well';
+});
+$router->get('/validar/{chave}', function ($chave) {
+    if ($chave === "mestre") {
+        return '{status:true}';
+    }
+    return '{status:false}';
+});
+
+
+$router->get('/participantes/login/{cpf}/{senha}', function ($cpf, $senha) {
+        return ;  
+});
+
+$router->get('/participantes/cadastro/{nome}/{cpf}/{senha}/{telefone}/{email}/{ra}', function ($nome,$cpf,$senha,$telefone,$email,$ra) {
+    return ;  
+});
+
+$router->get('/participantes/cancelarInscricao/{codigoInscricao}', function ($codigoInscricao) {
+    return ;  
+});
+
+$router->get('/participantes/ingresso/{codigoInscricao}', function ($codigoInscricao) {
+    return ;  
+});
+
+$router->get('/palestrantes/cadastrar/{nome}/{cpf}/{telefone}/{email}/{biografia}/{areaAtuacao}', function ($nome,$cpf,$telefone,$email,$biografia,$areaAtuacao) {
+    return ;  
+});
+
+$router->get('/palestrantes/alterar/{codigoPalestrante}/{mudancas}', function ($codigoPalestrante,$mudancas) {
+    return ;  
+});
+
+$router->get('/palestrantes/visualizar/{codigoPalestrante}/', function ($codigoPalestrante) {
+    return ;  
+});
+
+$router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
+    return ;  
+});
+
+$router->get('/participantes/excluir/{codigoPalestrante}/', function ($codigoPalestrante) {
+    return ;  
+});
+
+$router->get('/eventos/listar/{filtros}/', function ($filtros) {
+    return ;  
+});
+
+$router->get('/eventos/listarInscritos/{filtros}/', function ($filtros) {
+    return ;  
+});
+
+$router->get('/eventos/detalhesInscrito/{filtros}/', function ($filtros) {
+    return ;  
+});
+
+$router->get('/eventos/cadastrar/{titulo}/{periodoInicial}/{periodoFinal}/{dtIncricaoInicio}/{dtIncricaoFim}/{qtdMinInscritos}/{qtdMaxInscritos}/{modeloDoc}/{area}/{equipe}/{atividades}', function ($titulo,$periodoInicial,$periodoFinal,$dtIncricaoInicio,$dtIncricaoFim,$qtdMinInscritos,$qtdMaxInscritos,$modeloDoc,$area,$equipe,$atividades) {
+    return ;  
+});
+
+$router->get('/eventos/alterar/{codigoEvento}/{mudancas}/', function ($codigoEvento,$mudancas) {
+    return ;  
+});
+
+$router->get('/eventos/excluir/{codigoEvento}/', function ($codigoEvento) {
+    return ;  
+});
+
+$router->get('/eventos/cancelar/{codigoEvento}/', function ($codigoEvento) {
+    return ;  
+});
+
+$router->get('/imc/{altura}/{peso}', function ($altura, $peso) {
+    $alturaQ = ($altura/100) * ($altura/100);
+    $imc = $peso/$alturaQ;
+    $observacao = "Tá bom";
+    if ($imc <= 20) {
+        $observacao = "Visite sua vó";
+    }
+    if ($imc >= 30) {
+        $observacao = "Não visite sua vó";
+    }
+    $resultado = (object) [
+        'imc' => $imc,
+        'observacao' => $observacao
+    ];
+    return json_encode($resultado);
+});
