@@ -103,12 +103,18 @@ return true;
 //     return json_encode($resultado);
 // });
 
-$router->get('/evento/{filtro}/{valor}',function($filro,$valor){
+$router->get('/evento/listar/{filtro}/{valor}',function($filro,$valor){
     return'status:true';
 });
 
 $router->get('/evento/visulizar/{codigoEvento}',function($codigoEvento){
-    return 'status:true';
+    $evento = (object) [
+        'codigoEvento' => $codigoEvento,
+        'titulo' => "Teste",
+        'qtoMinInscritos' => 5,
+        'status' => "Aberto"
+    ];
+    return json_encode($evento);
 }); 
 
 // $router->get('/participante/inscricao/{codigoParticipante}/{codigoAtividade}',function($altura,$peso){
