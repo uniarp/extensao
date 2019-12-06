@@ -111,7 +111,7 @@ $router->get('/evento/visulizar/{codigoEvento}',function($codigoEvento){
     return 'status:true';
 }); 
 
-$router->get('/participante/inscricao/{codigoParticipante}/{codigoAtividade}',function($altura,$peso){
+// $router->get('/participante/inscricao/{codigoParticipante}/{codigoAtividade}',function($altura,$peso){
 
 $router->get('/', function () {
     return 'well';
