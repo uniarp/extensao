@@ -1,71 +1,82 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
 $router->get('/voluntarios/cadastrar/{nome}/{email}/{cpf}/{telefone}/{ra}/{curso}', function ($nome, $email, $cpf, $telefone, $ra, $curso) {
-return true;
+    $voluntario = (object) [
+        'codVoluntario' => 1
+    ];
+    return json_encode($voluntario);
 });
 
-$router->get('/voluntarios/alterar/{nome}/{email}/{cpf}/{telefone}/{ra}/{curso}', function ($nome, $email, $cpf, $telefone, $ra, $curso) {
-    return true;
-    });
+$router->get('/voluntarios/alterar/{codvoluntario}/{nome}/{email}/{cpf}/{telefone}/{ra}/{curso}', function ($codvoluntario, $nome, $email, $cpf, $telefone, $ra, $curso) {
+    $voluntario = array(
+        'codVoluntario' => $codvoluntario,
+        'nome' => $nome,
+        'email' => $email,
+        'cpf' => $cpf,
+        'telefone' => $telefone,
+        'ra' => $ra,
+        'curso' => $curso
+    );
+    return json_encode($voluntario);
+});
 
 $router->get('/voluntarios/listar', function () {
-return true;
+    $voluntarios = array(
+        array(
+            'codVoluntario' => 1, 'nome' => 'Teste', 'email' => 'uniarp1@uniarp.com', 'cpf' => 05335653025,
+            'telefone' => '4998349562', 'ra' => 025377, 'curso' => 'Sistemas'
+        ),
+        array(
+            'codVoluntario' => 2, 'nome' => 'Teste 2', 'email' => 'uniarp2@uniarp.com', 'cpf' => 01212312312,
+            'telefone' => '4998349562', 'ra' => 025317, 'curso' => 'Sistemas'
+        )
+    );
+    return json_encode($voluntarios);
 });
 
 $router->get('/voluntarios/excluir/{codVoluntario}', function ($codVoluntario) {
-return true;
+    $status = (object) [
+        'status' => true
+    ];
+    return json_encode($status);
 });
 
 $router->get('/validador/validarDocumento/{token}', function ($token) {
-return true;
+    $tokenDados = (object) [
+        'participante' => 'Maurício da Silva',
+        'data' => '2019/05/21',
+        'evento' => 'Sedepex',
+        'numeroHoras' => '6'
+    ];
+    return json_encode($tokenDados);
 });
 
 $router->get('/documentos/listar/{filtros}', function ($filtros) {
-return true;
+    $documentos = array(
+        array(
+            'codDocumento' => 1, 'codParticipante' => 1, 'nome' => 'Teste', 'cpf' => '08302158999', 'tipo' => 'Certificado', 'numeroHoras' => '12'
+        ),
+        array(
+            'codDocumento' => 2, 'codParticipante' => 1, 'nome' => 'Teste 2', 'cpf' => '03241158999', 'tipo' => 'Declaracao', 'numeroHoras' => '15'
+        )
+    );
+    return json_encode($documentos);
 });
 
 $router->get('/documentos/gerar/{codigoInscricao}', function ($codigoInscricao) {
-return true;
-});
-
-$router->get('/validador/validarDocumento/{token}', function ($token) {
-    $token = (object) [
-        'participante' => "Delmison",
-        'data' => "2019-05-10",
-        'evento' => "Sead",
-        'numeroHoras' => 15
+    $documento = (object) [
+        'codDocumento' => 1
     ];
-    return json_encode($token);
-});
-//
-$router->get('/evento/listar/{filtro}/{valor}',function($filtro,$valor){
-    $evento = (object) [
-        'codEvento'=> 1,
-        'titulo'=> "Teste",
-        'periodoInicial'=> "2019-10-10",
-        'periodoFinal'=> "2019-10-15",
-        'inscricaoInicio'=> "2019-09-20",
-        'inscricaoFim'=> "2019-10-05",
-        'qtdMinInscrito'=> 5,
-        'status' => "Aberto",
-        'qtdMaxInscrito'=> 20,
-        'modelDoc'=> "ambos"
-
-    ];
-    return json_encode($evento);
+    return json_encode($documento);
 });
 
-$router->get('/evento/visulizar/{codigoEvento}',function($codigoEvento){
+/* OPA OPA MEU CONSAGRADO */
+
+$router->get('/evento/listar/{filtro}/{valor}', function ($filro, $valor) {
+    return 'status:true';
+});
+
+$router->get('/evento/visulizar/{codigoEvento}', function ($codigoEvento) {
     $evento = (object) [
         'codigoEvento' => $codigoEvento,
         'titulo' => "Teste",
@@ -73,7 +84,7 @@ $router->get('/evento/visulizar/{codigoEvento}',function($codigoEvento){
         'status' => "Aberto"
     ];
     return json_encode($evento);
-}); 
+});
 
 $router->get('/participante/inscricao/{codigoParticipante}/{codigoAtividade}',function($codigoParticipante,$codigoAtividade){
     $participante = (object) [
@@ -97,60 +108,60 @@ $router->get('/participantes/login/{cpf}/{senha}', function ($cpf, $senha) {
     return json_encode($participante); 
 });
 
-$router->get('/participantes/cadastro/{nome}/{cpf}/{senha}/{telefone}/{email}/{ra}', function ($nome,$cpf,$senha,$telefone,$email,$ra) {
-    return ;  
+$router->get('/participantes/cadastro/{nome}/{cpf}/{senha}/{telefone}/{email}/{ra}', function ($nome, $cpf, $senha, $telefone, $email, $ra) {
+    return;
 });
 
 $router->get('/participantes/cancelarInscricao/{codigoInscricao}', function ($codigoInscricao) {
-    return ;  
+    return;
 });
 
 $router->get('/participantes/ingresso/{codigoInscricao}', function ($codigoInscricao) {
-    return ;  
+    return;
 });
 
-$router->get('/palestrantes/cadastrar/{nome}/{cpf}/{telefone}/{email}/{biografia}/{areaAtuacao}', function ($nome,$cpf,$telefone,$email,$biografia,$areaAtuacao) {
-    return ;  
+$router->get('/palestrantes/cadastrar/{nome}/{cpf}/{telefone}/{email}/{biografia}/{areaAtuacao}', function ($nome, $cpf, $telefone, $email, $biografia, $areaAtuacao) {
+    return;
 });
 
-$router->get('/palestrantes/alterar/{codigoPalestrante}/{mudancas}', function ($codigoPalestrante,$mudancas) {
-    return ;  
+$router->get('/palestrantes/alterar/{codigoPalestrante}/{mudancas}', function ($codigoPalestrante, $mudancas) {
+    return;
 });
 
 $router->get('/palestrantes/visualizar/{codigoPalestrante}/', function ($codigoPalestrante) {
-    return ;  
+    return;
 });
 
 $router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
-    return ;  
+    return;
 });
 
 $router->get('/participantes/excluir/{codigoPalestrante}/', function ($codigoPalestrante) {
-    return ;  
+    return;
 });
 
 $router->get('/eventos/listar/{filtros}/', function ($filtros) {
-    return ;  
+    return;
 });
 
 $router->get('/eventos/listarInscritos/{filtros}/', function ($filtros) {
-    return ;  
+    return;
 });
 
 $router->get('/eventos/detalhesInscrito/{filtros}/', function ($filtros) {
-    return ;  
+    return;
 });
 
-$router->get('/eventos/cadastrar/{titulo}/{periodoInicial}/{periodoFinal}/{dtIncricaoInicio}/{dtIncricaoFim}/{qtdMinInscritos}/{qtdMaxInscritos}/{modeloDoc}/{area}/{equipe}/{atividades}', function ($titulo,$periodoInicial,$periodoFinal,$dtIncricaoInicio,$dtIncricaoFim,$qtdMinInscritos,$qtdMaxInscritos,$modeloDoc,$area,$equipe,$atividades) {
-    return ;  
+$router->get('/eventos/cadastrar/{titulo}/{periodoInicial}/{periodoFinal}/{dtIncricaoInicio}/{dtIncricaoFim}/{qtdMinInscritos}/{qtdMaxInscritos}/{modeloDoc}/{area}/{equipe}/{atividades}', function ($titulo, $periodoInicial, $periodoFinal, $dtIncricaoInicio, $dtIncricaoFim, $qtdMinInscritos, $qtdMaxInscritos, $modeloDoc, $area, $equipe, $atividades) {
+    return;
 });
 
-$router->get('/eventos/alterar/{codigoEvento}/{mudancas}/', function ($codigoEvento,$mudancas) {
-    return ;  
+$router->get('/eventos/alterar/{codigoEvento}/{mudancas}/', function ($codigoEvento, $mudancas) {
+    return;
 });
 
 $router->get('/eventos/excluir/{codigoEvento}/', function ($codigoEvento) {
-    return ;  
+    return;
 });
 
 $router->get('/eventos/cancelar/{codigoEvento}/', function ($codigoEvento) {
