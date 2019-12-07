@@ -1,7 +1,6 @@
 <?php
 
 $router->get('/voluntarios/cadastrar/{nome}/{email}/{cpf}/{telefone}/{ra}/{curso}', function ($nome, $email, $cpf, $telefone, $ra, $curso) {
-<<<<<<< Updated upstream
     $voluntario = (object) [
         'codVoluntario' => 1
     ];
@@ -78,45 +77,6 @@ $router->get('/evento/listar/{filtro}/{valor}', function ($filro, $valor) {
 });
 
 $router->get('/evento/visulizar/{codigoEvento}', function ($codigoEvento) {
-=======
-    return true;
-});
-
-$router->get('/voluntarios/alterar/{nome}/{email}/{cpf}/{telefone}/{ra}/{curso}', function ($nome, $email, $cpf, $telefone, $ra, $curso) {
-    return true;
-});
-
-$router->get('/voluntarios/listar', function () {
-    return true;
-});
-
-$router->get('/voluntarios/excluir/{codVoluntario}', function ($codVoluntario) {
-    return true;
-});
-
-$router->get('/validador/validarDocumento/{token}', function ($token) {
-    return true;
-});
-
-$router->get('/documentos/listar/{filtros}', function ($filtros) {
-    return true;
-});
-
-$router->get('/documentos/gerar/{codigoInscricao}', function ($codigoInscricao) {
-    return true;
-});
-
-$router->get('/validador/validarDocumento/{token}', function ($token) {
-    return true;
-});
-
-
-$router->get('/evento/listar/{filtro}/{valor}',function($filro,$valor){
-    return'status:true';
-});
-
-$router->get('/evento/visualizar/{codigoEvento}',function($codigoEvento){
->>>>>>> Stashed changes
     $evento = (object) [
         'codigoEvento' => $codigoEvento,
         'titulo' => "Teste",
@@ -180,30 +140,6 @@ $router->get('/participantes/excluir/{codigoPalestrante}/', function ($codigoPal
     return;
 });
 
-<<<<<<< Updated upstream
-$router->get('/eventos/listar/{filtros}/', function ($filtros) {
-    return;
-});
-
-$router->get('/eventos/listarInscritos/{filtros}/', function ($filtros) {
-    return;
-});
-
-$router->get('/eventos/detalhesInscrito/{filtros}/', function ($filtros) {
-    return;
-});
-
-$router->get('/eventos/cadastrar/{titulo}/{periodoInicial}/{periodoFinal}/{dtIncricaoInicio}/{dtIncricaoFim}/{qtdMinInscritos}/{qtdMaxInscritos}/{modeloDoc}/{area}/{equipe}/{atividades}', function ($titulo, $periodoInicial, $periodoFinal, $dtIncricaoInicio, $dtIncricaoFim, $qtdMinInscritos, $qtdMaxInscritos, $modeloDoc, $area, $equipe, $atividades) {
-    return;
-});
-
-$router->get('/eventos/alterar/{codigoEvento}/{mudancas}/', function ($codigoEvento, $mudancas) {
-    return;
-});
-
-$router->get('/eventos/excluir/{codigoEvento}/', function ($codigoEvento) {
-    return;
-=======
 $router->get('/eventos/listarEvento/{codEvento}/', function ($codEvento) {
     $evento = (object) [
         'codEvento'=> $codEvento,
@@ -307,7 +243,6 @@ $router->get('/eventos/alterar/{codigoEvento}/{mudancas}/', function ($codigoEve
     ];
 
     return json_encode($evento);  
->>>>>>> Stashed changes
 });
 
 $router->get('/eventos/excluir/{codigoEvento}', function ($codigoEvento) {
@@ -317,8 +252,6 @@ $router->get('/eventos/excluir/{codigoEvento}', function ($codigoEvento) {
 
     return json_encode($evento);  
 });
-<<<<<<< Updated upstream
-=======
 
 $router->get('/eventos/cancelar/{codigoEvento}', function ($codigoEvento) {
     $evento = (object) [
@@ -330,4 +263,3 @@ $router->get('/eventos/cancelar/{codigoEvento}', function ($codigoEvento) {
 });
 
 
->>>>>>> Stashed changes
