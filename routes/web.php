@@ -10,35 +10,6 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
-// $router->get('/', function() {
-//     return 'leticia' ;
-// });
-
-// $router->get('/validar/{chave}', function ($chave) {
-//     if ($chave === "mestre") {
-//         return '{status:true}' ;
-//     }
-//     return '{status:false}' ; 
-// });
-
-// $router->get('/imc/{altura}/{peso}', function ($altura,$peso) {
-//     $alturaQ = ($altura/100)*($altura/100);
-//     $imc = $peso/$alturaQ;
-//     $observacao = "ta bom";
-//     if ($imc <=20){
-//         $observacao = "visite sua vó";
-//     }
-//     if ($imc >= 30){
-//         $observacao = "não visite sua vó";
-//     }
-//     $resultado = (object)[
-//         'imc' => $imc,
-//         'observacao' => $observacao
-//     ];
-//     return json_encode ($resultado);
-// });
-
 $router->get('/voluntarios/cadastrar/{nome}/{email}/{cpf}/{telefone}/{ra}/{curso}', function ($nome, $email, $cpf, $telefone, $ra, $curso) {
 return true;
 });
@@ -68,43 +39,30 @@ return true;
 });
 
 $router->get('/validador/validarDocumento/{token}', function ($token) {
-return true;
+    $token = (object) [
+        'participante' => "Delmison",
+        'data' => "2019-05-10",
+        'evento' => "Sead",
+        'numeroHoras' => 15
+    ];
+    return json_encode($token);
 });
+//
+$router->get('/evento/listar/{filtro}/{valor}',function($filtro,$valor){
+    $evento = (object) [
+        'codEvento'=> 1,
+        'titulo'=> "Teste",
+        'periodoInicial'=> "2019-10-10",
+        'periodoFinal'=> "2019-10-15",
+        'inscricaoInicio'=> "2019-09-20",
+        'inscricaoFim'=> "2019-10-05",
+        'qtdMinInscrito'=> 5,
+        'status' => "Aberto",
+        'qtdMaxInscrito'=> 20,
+        'modelDoc'=> "ambos"
 
-// $router->get('/', function () use ($router) {
-//     return $router->app->version();
-// });
-
-// $router->get('/', function(){
-//     return ' Delmison ';
-// });
-
-// $router->get('/validar/{chave}',function($chave){
-//     if($chave == "mestre"){
-//         return'{status:true}';
-//     }
-//     return'{status:false}';
-// });
-
-// $router->get('/imc/{altura}/{peso}',function($altura,$peso){
-//     $alturaQ = ($altura/100) * ($altura/100);
-//     $imc = $peso/$alturaQ;
-//     $observacao = "Ta bom";
-//     if($imc <= 20) {
-//         $observacao = "visite sua vó";
-//     }
-//     if($imc >= 30) {
-//         $observacao = "não visite sua vó";
-//     }
-//     $resultado = (object) [
-//         'imc' => $imc,
-//         'observacao' => $observacao
-//     ];
-//     return json_encode($resultado);
-// });
-
-$router->get('/evento/listar/{filtro}/{valor}',function($filro,$valor){
-    return'status:true';
+    ];
+    return json_encode($evento);
 });
 
 $router->get('/evento/visulizar/{codigoEvento}',function($codigoEvento){
@@ -117,11 +75,13 @@ $router->get('/evento/visulizar/{codigoEvento}',function($codigoEvento){
     return json_encode($evento);
 }); 
 
-// $router->get('/participante/inscricao/{codigoParticipante}/{codigoAtividade}',function($altura,$peso){
-
-$router->get('/', function () {
-    return 'well';
+$router->get('/participante/inscricao/{codigoParticipante}/{codigoAtividade}',function($codigoParticipante,$codigoAtividade){
+    $participante = (object) [
+        'codInscricao' => 1
+    ];
+    return json_encode($participante);
 });
+
 $router->get('/validar/{chave}', function ($chave) {
     if ($chave === "mestre") {
         return '{status:true}';
@@ -131,7 +91,10 @@ $router->get('/validar/{chave}', function ($chave) {
 
 
 $router->get('/participantes/login/{cpf}/{senha}', function ($cpf, $senha) {
-        return ;  
+    $participante = (object) [
+        'status'=> true
+    ];
+    return json_encode($participante); 
 });
 
 $router->get('/participantes/cadastro/{nome}/{cpf}/{senha}/{telefone}/{email}/{ra}', function ($nome,$cpf,$senha,$telefone,$email,$ra) {
@@ -192,21 +155,4 @@ $router->get('/eventos/excluir/{codigoEvento}/', function ($codigoEvento) {
 
 $router->get('/eventos/cancelar/{codigoEvento}/', function ($codigoEvento) {
     return ;  
-});
-
-$router->get('/imc/{altura}/{peso}', function ($altura, $peso) {
-    $alturaQ = ($altura/100) * ($altura/100);
-    $imc = $peso/$alturaQ;
-    $observacao = "Tá bom";
-    if ($imc <= 20) {
-        $observacao = "Visite sua vó";
-    }
-    if ($imc >= 30) {
-        $observacao = "Não visite sua vó";
-    }
-    $resultado = (object) [
-        'imc' => $imc,
-        'observacao' => $observacao
-    ];
-    return json_encode($resultado);
 });
