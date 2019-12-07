@@ -108,32 +108,75 @@ $router->get('/participantes/login/{cpf}/{senha}', function ($cpf, $senha) {
     return json_encode($participante); 
 });
 
-$router->get('/participantes/cadastro/{nome}/{cpf}/{senha}/{telefone}/{email}/{ra}', function ($nome, $cpf, $senha, $telefone, $email, $ra) {
-    return;
+$router->get('/participantes/cadastro/{nome}/{cpf}/{senha}/{telefone}/{email}/{ra}', function ($nome,$cpf,$senha,$telefone,$email,$ra) {
+    $participante = (object) [
+        'codParticipante' => 1
+    ];
+    return json_encode($participante);
 });
 
 $router->get('/participantes/cancelarInscricao/{codigoInscricao}', function ($codigoInscricao) {
-    return;
+    $participante = (object) [
+        'status' => "true"
+    ];
+    return json_encode($participante);
 });
 
 $router->get('/participantes/ingresso/{codigoInscricao}', function ($codigoInscricao) {
-    return;
+    $participante = (object) [
+        'qrCode' => 'http://s.glbimg.com/jo/g1/f/original/2011/05/17/qrcode.jpg'
+    ];
+    return json_encode($participante); 
 });
 
-$router->get('/palestrantes/cadastrar/{nome}/{cpf}/{telefone}/{email}/{biografia}/{areaAtuacao}', function ($nome, $cpf, $telefone, $email, $biografia, $areaAtuacao) {
-    return;
+$router->get('/palestrantes/cadastrar/{nome}/{cpf}/{telefone}/{email}/{biografia}/{areaAtuacao}', function ($nome,$cpf,$telefone,$email,$biografia,$areaAtuacao) {
+    $palestrante = (object) [
+        'codPalestrante' => 123,
+        'status' => "true"
+    ];
+    return json_encode($palestrante);
 });
 
-$router->get('/palestrantes/alterar/{codigoPalestrante}/{mudancas}', function ($codigoPalestrante, $mudancas) {
-    return;
+$router->get('/palestrantes/alterar/{codigoPalestrante}/{mudancas}', function ($codigoPalestrante,$mudancas) {
+    $palestrante = (object) [
+        'codPalestrante' => 123,
+        'status' => "true"
+    ];
+    return json_encode($palestrante);
 });
 
 $router->get('/palestrantes/visualizar/{codigoPalestrante}/', function ($codigoPalestrante) {
-    return;
+    $palestrante = (object) [
+        'codPalestrante' => 123,
+        'nome' => "teste",
+        'email' => "uniarp1@uniarp.com",
+        'cpf' => "05335653025",
+        'telefone' => "4998349562",
+        'biografia' => "formado desde 2000, professor e palestrante"
+    ];
+    return json_encode($palestrante);
 });
 
 $router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
-    return;
+    $palestrante = array(
+        array(
+        'codPalestrante' => 123,
+        'nome' => "teste",
+        'email' => "uniarp1@uniarp.com",
+        'cpf' => "05335653025",
+        'telefone' => "4998349562",
+        'biografia' => "formado desde 2000, professor e palestrante"
+        ),
+        array(
+        'codPalestrante' => 123,
+        'nome' => "teste",
+        'email' => "uniarp1@uniarp.com",
+        'cpf' => "05335653025",
+        'telefone' => "4998349562",
+        'biografia' => "formado desde 2000, professor e palestrante"
+        )
+    );
+    return json_encode($palestrante);
 });
 
 $router->get('/participantes/excluir/{codigoPalestrante}/', function ($codigoPalestrante) {
