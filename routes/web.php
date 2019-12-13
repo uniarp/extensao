@@ -160,28 +160,32 @@ $router->get('/palestrantes/visualizar/{codigoPalestrante}/', function ($codigoP
 $router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
     $palestrante = array(
         array(
-        'codPalestrante' => 123,
-        'nome' => "teste",
+        'codPalestrante' => 1,
+        'nome' => "Teste1",
         'email' => "uniarp1@uniarp.com",
-        'cpf' => "05335653025",
-        'telefone' => "4998349562",
+        'cpf' => "11111111111",
+        'telefone' => "492222222",
         'biografia' => "formado desde 2000, professor e palestrante"
         ),
         array(
-        'codPalestrante' => 123,
-        'nome' => "teste",
-        'email' => "uniarp1@uniarp.com",
-        'cpf' => "05335653025",
-        'telefone' => "4998349562",
-        'biografia' => "formado desde 2000, professor e palestrante"
+        'codPalestrante' => 2,
+        'nome' => "Teste2",
+        'email' => "uniarp2@uniarp.com",
+        'cpf' => "22222222222",
+        'telefone' => "492222222",
+        'biografia' => "professor adjunto"
         )
     );
     return json_encode($palestrante);
 });
 
 $router->get('/participantes/excluir/{codigoPalestrante}/', function ($codigoPalestrante) {
-    return;
+    $palestrante = (object) [
+        'status' => true   
+    ];
+    return json_encode($palestrante);
 });
+
 
 $router->get('/eventos/listarEvento/{codEvento}/', function ($codEvento) {
     $evento = (object) [
@@ -191,10 +195,10 @@ $router->get('/eventos/listarEvento/{codEvento}/', function ($codEvento) {
         'periodoFinal'=> '2020-10-15',
         'inscricaoInicio'=> '2020-09-20',
         'inscricaoFim'=> '2020-10-05',
-        'qtdMinInscrito'=> 5,
+        'qtdMinInscritos'=> 5,
         'status'=> 'Aberto',
-        'qtdMaxInscrito'=> 20,
-        'modelDoc'=> 'https;//modeloSead.png',
+        'qtdMaxInscritos'=> 20,
+        'modeloDoc'=> 'https;//modeloSead.png',
         'area' => ['Engenharia', 'Direiro'],
         'equipe' => ['Mauricio','Delmison','Gabriel'],
         'atividades' => ['Abertura', 'Palestra', 'Fechamento']
@@ -248,15 +252,15 @@ $router->get('/eventos/detalhesInscrito/{codInscrito}/', function ($codInscrito)
 $router->get('/eventos/cadastrar/{titulo}/{periodoInicial}/{periodoFinal}/{dtIncricaoInicio}/{dtIncricaoFim}/{qtdMinInscritos}/{qtdMaxInscritos}/{modeloDoc}/{area}/{equipe}/{atividades}', function ($titulo,$periodoInicial,$periodoFinal,$dtIncricaoInicio,$dtIncricaoFim,$qtdMinInscritos,$qtdMaxInscritos,$modeloDoc,$area,$equipe,$atividades) {
     $evento = (object) [
         'codEvento'=> 1,
-        'titulo'=> 'Teste 2',
+        'titulo'=> 'Teste 1',
         'periodoInicial'=> '2020-10-10',
         'periodoFinal'=> '2020-10-15',
         'inscricaoInicio'=> '2020-09-20',
         'inscricaoFim'=> '2020-10-05',
-        'qtdMinInscrito'=> 5,
+        'qtdMinInscritos'=> 5,
         'status'=> 'Aberto',
-        'qtdMaxInscrito'=> 20,
-        'modelDoc'=> 'https;//modeloSead.png',
+        'qtdMaxInscritos'=> 20,
+        'modeloDoc'=> 'https;//modeloTeste1.png',
         'area' => ['Engenharia', 'Direiro'],
         'equipe' => ['Mauricio','Delmison','Gabriel'],
         'atividades' => ['Abertura', 'Palestra', 'Fechamento']
@@ -276,10 +280,10 @@ $router->get('/eventos/alterar/{codigoEvento}/{mudancas}/', function ($codigoEve
         'periodoFinal'=> '2020-10-15',
         'inscricaoInicio'=> '2020-09-20',
         'inscricaoFim'=> '2020-10-05',
-        'qtdMinInscrito'=> 5,
+        'qtdMinInscritos'=> 5,
         'status'=> 'Aberto',
-        'qtdMaxInscrito'=> 20,
-        'modelDoc'=> 'https://modeloTeste2.png',
+        'qtdMaxInscritos'=> 20,
+        'modeloDoc'=> 'https://modeloTeste2.png',
         'area' => ['Engenharia', 'Direiro'],
         'equipe' => ['Mauricio','Delmison','Gabriel'],
         'atividades' => ['Abertura', 'Palestra', 'Fechamento']
