@@ -72,16 +72,22 @@ $router->get('/documentos/gerar/{codigoInscricao}', function ($codigoInscricao) 
 
 /* OPA OPA MEU CONSAGRADO */
 
-$router->get('/evento/listar/{filtro}/{valor}', function ($filro, $valor) {
+$router->get('/eventos/listar/{filtro}/{valor}', function ($filro, $valor) {
     return 'status:true';
 });
 
-$router->get('/evento/visulizar/{codigoEvento}', function ($codigoEvento) {
+$router->get('/eventos/visulizar/{codigoEvento}', function ($codigoEvento) {
     $evento = (object) [
         'codigoEvento' => $codigoEvento,
         'titulo' => "Teste",
+        'periodoInicial' => '2019-10-10',
+        'periodoFinal' => '2019-10-15',
+        'inscricaoInicio' => '2019-09-20',
+        'inscricaoFim' => '2019-10-05',
         'qtoMinInscritos' => 5,
-        'status' => "Aberto"
+        'status' => "Aberto",
+        'qtdMaxInscrito' => 20,
+        'modelDoc' => 'Https://modeloSead.png'
     ];
     return json_encode($evento);
 });
@@ -309,4 +315,32 @@ $router->get('/eventos/cancelar/{codigoEvento}', function ($codigoEvento) {
     return json_encode($evento);  
 });
 
-
+$router->get('/eventos/listar/{filtros}', function ($filtros) {
+    $evento = array(
+        array(
+            'codEvento' => 1,
+            'titulo' => 'Teste',
+            'periodoInicial' => '2019-10-10',
+            'periodoFinal' => '2019-10-15',
+            'inscricaoInicio' => '2019-09-20',
+            'inscricaoFim' => '2019-10-05',
+            'qtdMinInscrito' => 5,
+            'status' => 'Aberto',
+            'qtdMaxInscrito' => 20,
+            'modelDoc' => 'ambos'
+        ),
+        array(
+            'codEvento' => 2,
+            'titulo' => 'Teste 2',
+            'periodoInicial' => '2019-10-10',
+            'periodoFinal' => '2019-10-15',
+            'inscricaoInicio' => '2019-09-20',
+            'inscricaoFim' => '2019-10-05',
+            'qtdMinInscrito' => 5,
+            'status' => 'Aberto',
+            'qtdMaxInscrito' => 20,
+            'modelDoc' => 'ambos'
+        )
+    );
+    return json_encode($evento);
+});
