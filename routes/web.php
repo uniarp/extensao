@@ -41,6 +41,7 @@ $router->get('/voluntarios/excluir/{codVoluntario}', function ($codVoluntario) {
     return json_encode($status);
 });
 
+
 $router->get('/validador/validarDocumento/{token}', function ($token) {
     $tokenDados = (object) [
         'participante' => 'Maurício da Silva',
