@@ -1,5 +1,10 @@
 <?php
 
+$router->get('testeconte', function () use ($router) {
+    return app('db')->select("select * from palestrante");
+});
+
+
 $router->get('/voluntarios/cadastrar/{nome}/{email}/{cpf}/{telefone}/{ra}/{curso}', function ($nome, $email, $cpf, $telefone, $ra, $curso) {
     $voluntario = (object) [
         'codVoluntario' => 1
