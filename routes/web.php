@@ -1,5 +1,9 @@
 <?php
 
+use \Illuminate\Http\Request;
+
+$request = new Request();
+
 $router->get('testeconte', function () use ($router) {
     return app('db')->select("select * from palestrante");
 });
@@ -187,10 +191,9 @@ $router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
 $router->get('/participantes/listar/', 'ParticipanteController@listarParticipante');
 $router->get('/participantes/cadastrar/{codparticipante}/{nome}/{cpf}/{ra}/{senha}/{telefone}/{email}', 'ParticipanteController@cadastrarParticipante');
 
-$router->post('/participantes/excluir', function (\Illuminate\Http\Request $request) {
+$router->post('/participantes/excluir', function($request) {
     return json_encode($request->json()->all());
 });
-
 
 $router->get('/eventos/listarEvento/{codEvento}/', function ($codEvento) {
     $evento = (object) [
