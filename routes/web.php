@@ -120,13 +120,6 @@ $router->get('/participantes/login/{cpf}/{senha}', function ($cpf, $senha) {
     return json_encode($participante); 
 });
 
-$router->get('/participantes/cadastro/{nome}/{cpf}/{senha}/{telefone}/{email}/{ra}', function ($nome,$cpf,$senha,$telefone,$email,$ra) {
-    $participante = (object) [
-        'codParticipante' => 1
-    ];
-    return json_encode($participante);
-});
-
 $router->get('/participantes/cancelarInscricao/{codigoInscricao}', function ($codigoInscricao) {
     $participante = (object) [
         'status' => "true"
@@ -192,6 +185,7 @@ $router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
 });
 
 $router->get('/participantes/listar/', 'ParticipanteController@listarParticipante');
+$router->get('/participantes/cadastrar/{codparticipante}/{nome}/{cpf}/{ra}/{senha}/{telefone}/{email}', 'ParticipanteController@cadastrarParticipante');
 
 $router->get('/participantes/excluir/{codigoPalestrante}/', function ($codigoPalestrante) {
     $palestrante = (object) [
