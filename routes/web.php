@@ -187,8 +187,8 @@ $router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
 $router->get('/participantes/listar/', 'ParticipanteController@listarParticipante');
 $router->get('/participantes/cadastrar/{codparticipante}/{nome}/{cpf}/{ra}/{senha}/{telefone}/{email}', 'ParticipanteController@cadastrarParticipante');
 
-$request = $router->post('/participantes/excluir/{codigoPalestrante}/', function ($request, $codigoPalestrante) {
-    return $request;
+$router->get('/participantes/excluir/{codigoPalestrante}/', function ($codigoPalestrante) {
+    return json_encode($codigoPalestrante);
 });
 
 
