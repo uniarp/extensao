@@ -191,7 +191,7 @@ $router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
     return json_encode($palestrante);
 });
 
-$router->get('/participantes/listar/', 'MensagensController@listar');
+$router->get('/participantes/listar/', 'ParticipanteController@listarParticipante');
 
 $router->get('/participantes/excluir/{codigoPalestrante}/', function ($codigoPalestrante) {
     $palestrante = (object) [
