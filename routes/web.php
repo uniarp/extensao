@@ -199,7 +199,7 @@ $router->post('/participantes/cadastrar', function() {
         $response['erro'] = $e;
         return json_encode($response);
     }
-    return true;
+    return $body;
 });
 
 $router->delete('/participantes/excluir/{codParticipante}', function($codParticipante) {
