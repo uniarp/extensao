@@ -360,5 +360,5 @@ $router->get('/eventos/listar/{filtros}', function ($filtros) {
 
 function dadosSessao() {
     $request = new Request();
-    return json_decode($request->json()->all(), true);
+    return $request->json()->all();
 }
