@@ -189,7 +189,7 @@ $router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
 $router->get('/participantes/listar/', 'ParticipanteController@listarParticipante');
 
 $router->post('/participantes/cadastrar', function() {
-    $body = json_decode(dadosSessao());
+    $body = dadosSessao();
     $participante = new ParticipanteController();
 
     try {
@@ -360,5 +360,5 @@ $router->get('/eventos/listar/{filtros}', function ($filtros) {
 
 function dadosSessao() {
     $request = new Request();
-    return $request->json()->all();
+    return json_decode($request->json()->all(), true);
 }
