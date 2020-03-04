@@ -1,11 +1,11 @@
 <?php
 
 use \Illuminate\Http\Request;
+use app\Http\Controllers\ParticipanteController;
 
 $router->get('testeconte', function () use ($router) {
     return app('db')->select("select * from palestrante");
 });
-
 
 $router->get('/voluntarios/cadastrar/{nome}/{email}/{cpf}/{telefone}/{ra}/{curso}', function ($nome, $email, $cpf, $telefone, $ra, $curso) {
     $voluntario = (object) [
@@ -187,10 +187,23 @@ $router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
 });
 
 $router->get('/participantes/listar/', 'ParticipanteController@listarParticipante');
-$router->get('/participantes/cadastrar/{codparticipante}/{nome}/{cpf}/{ra}/{senha}/{telefone}/{email}', 'ParticipanteController@cadastrarParticipante');
 
-$router->post('/participantes/excluir', function() {
-    return dadosSessao();
+$router->post('/participantes/cadastrar', function() {
+    $body = json_decode(dadosSessao());
+    $participante = new ParticipanteController();
+
+    try {
+        $participante->cadastrarParticipante($body['codParticipante'], $body['nome'], $body['cpf'], $body['ra'], $body['senha'],
+            $body['telefone'], $body['email']);
+    } catch(Exception $e) {
+        $response['erro'] = $e;
+        return json_encode($response);
+    }
+    return true;
+});
+
+$router->delete('/participantes/excluir/{codParticipante}', function($codParticipante) {
+    return $codParticipante;
 });
 
 $router->get('/eventos/listarEvento/{codEvento}/', function ($codEvento) {
