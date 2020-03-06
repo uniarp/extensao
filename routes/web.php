@@ -196,8 +196,8 @@ $router->post('/participantes/cadastrar', function() {
         $participante->cadastrarParticipante($body['codParticipante'], $body['nome'], $body['cpf'], $body['ra'], $body['senha'],
             $body['telefone'], $body['email']);
     } catch(Exception $e) {
-        $response['erro'] = $e;
-        return json_encode($response);
+        $responsea['erro'] = $e;
+        return json_encode($responsea);
     }
     return true;
 });
