@@ -13,7 +13,7 @@ class ParticipanteController extends BaseController {
 
     public function cadastrarParticipante($codparticipante, $nome, $cpf, $ra, $senha, $telefone, $email) {
         if ($codparticipante === null) {
-            $query = "INSERT INTO participante ('nome', 'cpf', 'ra', 'senha', 'telefone', 'email') VALUES (";
+            $query = 'INSERT INTO participante ("nome", "cpf", "ra", "senha", "telefone", "email") VALUES (';
             $query .= "'" . $nome . "', '" . $cpf . "', '" . $ra . "', '" . $senha . "', '" . $telefone . "', '" . $email . "');";
             return $query;
         } else {
