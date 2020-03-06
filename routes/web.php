@@ -1,7 +1,7 @@
 <?php
 
 use \Illuminate\Http\Request;
-use App\Http\Controllers\ParticipanteController;
+use app\Http\Controllers\ParticipanteController;
 
 $router->get('testeconte', function () use ($router) {
     return app('db')->select("select * from palestrante");
