@@ -193,13 +193,13 @@ $router->post('/participantes/cadastrar', function() {
     $participante = new ParticipanteController();
 
     try {
-        $participante->cadastrarParticipante($body['codParticipante'], $body['nome'], $body['cpf'], $body['ra'], $body['senha'],
+        $sql = $participante->cadastrarParticipante($body['codParticipante'], $body['nome'], $body['cpf'], $body['ra'], $body['senha'],
             $body['telefone'], $body['email']);
     } catch(Exception $e) {
         $response['erro'] = $e;
-        return json_encode($response);
+        return json_encode($sql);
     }
-    return $body;
+    return $sql;
 });
 
 $router->delete('/participantes/excluir/{codParticipante}', function($codParticipante) {
