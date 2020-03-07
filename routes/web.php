@@ -215,7 +215,7 @@ $router->post('/participantes/cadastrar', function() {
 
 //Usuario
 //Lsitar
-$router->get('/usuarios/listar/', 'UsuarioController@listarUsuario');
+$router->get('/usuarios/listar', 'UsuarioController@listarUsuario');
 //cadastar
 $router->post('/usuarios/cadastrar', function() {
     $body = dadosSessao();
