@@ -12,11 +12,11 @@ class PalestranteController extends BaseController {
         $i = 0;
         foreach ($palestrantes as $palestrante) {
             $areasPalestrante = app('db')->select("SELECT p.codareapalestrante, a.codarea, a.nome FROM areapalestrante p
-            JOIN area a ON a.codarea = p.codarea WHERE p.codpalestrante = " . $palestrante['codpalestrante'] . ";");
+            JOIN area a ON a.codarea = p.codarea WHERE p.codpalestrante = '" . $palestrante['codpalestrante'] . "';");
             $palestrantes[$i]['areasPalestante'] =  $areasPalestrante;
             $i++;
         }
-        return $palestrantes;
+        return json_encode($palestrantes);
     }
 
     public function cadastrarPalestrante($codpalestrante, $nome, $cpf, $telefone, $email,  $area, $biografia) {
