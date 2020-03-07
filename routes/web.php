@@ -2,6 +2,8 @@
 
 use \Illuminate\Http\Request;
 use \App\Http\Controllers\ParticipanteController;
+use \App\Http\Controllers\UsuarioController;
+use \App\Http\Controllers\PalestranteController;
 
 $router->get('testeconte', function () use ($router) {
     return app('db')->select("select * from palestrante");
@@ -136,12 +138,21 @@ $router->get('/participantes/ingresso/{codigoInscricao}', function ($codigoInscr
     return json_encode($participante); 
 });
 
-$router->get('/palestrantes/cadastrar/{nome}/{cpf}/{telefone}/{email}/{biografia}/{areaAtuacao}', function ($nome,$cpf,$telefone,$email,$biografia,$areaAtuacao) {
-    $palestrante = (object) [
-        'codPalestrante' => 123,
-        'status' => "true"
-    ];
-    return json_encode($palestrante);
+//Palestrante
+$router->get('/palestrantes/listar/', 'PalestranteController@listarPalestrante');
+
+$router->post('/palestrantes/cadastrar', function() {
+    $body = dadosSessao();
+    $palestrante = new PalestranteController();
+
+    try {
+        $palestrante->cadastrarPalestrante($body['codPalestrante'], $body['nome'], $body['cpf'], $body['telefone'], $body['email'],
+            $body['area'], $body['biografia']);
+    } catch(Exception $e) {
+        $responsea['erro'] = $e;
+        return json_encode($responsea);
+    }
+    return true;
 });
 
 $router->get('/palestrantes/alterar/{codigoPalestrante}/{mudancas}', function ($codigoPalestrante,$mudancas) {
@@ -201,6 +212,25 @@ $router->post('/participantes/cadastrar', function() {
     }
     return true;
 });
+
+//Usuario
+//Lsitar
+$router->get('/usuarios/listar/', 'UsuarioController@listarUsuario');
+//cadastar
+$router->post('/usuarios/cadastrar', function() {
+    $body = dadosSessao();
+    $usuario = new UsuarioController();
+
+    try {
+        $usuario->cadastrarUsuario($body['codUsuario'], $body['nome'], $body['email'], $body['cpf'], $body['cargo']
+        , $body['senha']);
+    } catch(Exception $e) {
+        $responsea['erro'] = $e;
+        return json_encode($responsea);
+    }
+    return true;
+});
+
 
 $router->delete('/participantes/excluir/{codParticipante}', function($codParticipante) {
     return $codParticipante;
