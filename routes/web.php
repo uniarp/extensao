@@ -222,8 +222,7 @@ $router->post('/usuarios/cadastrar', function() {
     $usuario = new UsuarioController();
 
     try {
-        $usuario->cadastrarUsuario($body['codUsuario'], $body['nome'], $body['email'], $body['cpf'], $body['cargo']
-        , $body['senha']);
+        $usuario->cadastrarUsuario($body['codUsuario'], $body['nome'], $body['email'], $body['cpf'], $body['senha']);
     } catch(Exception $e) {
         $responsea['erro'] = $e;
         return json_encode($responsea);
