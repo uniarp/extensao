@@ -212,15 +212,20 @@ $router->post('/participantes/cadastrar', function () {
     $body = dadosSessao();
     $participante = new ParticipanteController();
 
-    $participante->cadastrarParticipante(
-        $body['codParticipante'],
-        $body['nome'],
-        $body['cpf'],
-        $body['ra'],
-        $body['senha'],
-        $body['telefone'],
-        $body['email']
-    );
+    try {
+        $participante->cadastrarParticipante(
+            $body['codParticipante'],
+            $body['nome'],
+            $body['cpf'],
+            $body['ra'],
+            $body['senha'],
+            $body['telefone'],
+            $body['email']
+        );
+    } catch (Exception $e) {
+        $response['erro'] = $e;
+        return response($response, 400);
+    }
     return response('true', 200);
 });
 
