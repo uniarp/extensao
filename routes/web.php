@@ -149,10 +149,11 @@ $router->post('/palestrantes/cadastrar', function() {
         $palestrante->cadastrarPalestrante($body['codPalestrante'], $body['nome'], $body['cpf'], $body['telefone'], $body['email'],
             $body['area'], $body['biografia']);
     } catch(Exception $e) {
-        $responsea['erro'] = $e;
-        return response(json_encode($responsea), 500);
+        $response['erro'] = $e;
+        return response(json_encode($response), 500);
     }
-    return response('true', 400);
+    $response['rs'] = 'true';
+    return response(json_encode($response), 400);
 });
 
 $router->get('/palestrantes/alterar/{codigoPalestrante}/{mudancas}', function ($codigoPalestrante,$mudancas) {
