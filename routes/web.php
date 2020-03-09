@@ -4,6 +4,7 @@ use \Illuminate\Http\Request;
 use \App\Http\Controllers\ParticipanteController;
 use \App\Http\Controllers\UsuarioController;
 use \App\Http\Controllers\PalestranteController;
+use \Illuminate\Http\ResponseResponseResponseSymfony\Component\HttpFoundation\Response;
 
 $router->get('testeconte', function () use ($router) {
     return app('db')->select("select * from palestrante");
@@ -211,21 +212,16 @@ $router->post('/participantes/cadastrar', function () {
     $body = dadosSessao();
     $participante = new ParticipanteController();
 
-    try {
-        $participante->cadastrarParticipante(
-            $body['codParticipante'],
-            $body['nome'],
-            $body['cpf'],
-            $body['ra'],
-            $body['senha'],
-            $body['telefone'],
-            $body['email']
-        );
-    } catch (Exception $e) {
-        $responsea['erro'] = $e;
-        return json_encode($responsea);
-    }
-    return true;
+    $participante->cadastrarParticipante(
+        $body['codParticipante'],
+        $body['nome'],
+        $body['cpf'],
+        $body['ra'],
+        $body['senha'],
+        $body['telefone'],
+        $body['email']
+    );
+    return response('true', 400);
 });
 
 //Usuario
