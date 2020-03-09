@@ -150,9 +150,9 @@ $router->post('/palestrantes/cadastrar', function() {
             $body['area'], $body['biografia']);
     } catch(Exception $e) {
         $responsea['erro'] = $e;
-        return json_encode($responsea);
+        return response(json_encode($responsea), 500);
     }
-    return true;
+    return response(true, 400);
 });
 
 $router->get('/palestrantes/alterar/{codigoPalestrante}/{mudancas}', function ($codigoPalestrante,$mudancas) {
