@@ -152,7 +152,7 @@ $router->post('/palestrantes/cadastrar', function() {
         $responsea['erro'] = $e;
         return response(json_encode($responsea), 500);
     }
-    return response(true, 400);
+    return response('true', 400);
 });
 
 $router->get('/palestrantes/alterar/{codigoPalestrante}/{mudancas}', function ($codigoPalestrante,$mudancas) {
