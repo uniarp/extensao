@@ -102,7 +102,7 @@ $router->get('/eventos/visulizar/{codigoEvento}', function ($codigoEvento) {
     return json_encode($evento);
 });
 
-$router->get('/participante/inscricao/{codigoParticipante}/{codigoAtividade}',function($codigoParticipante,$codigoAtividade){
+$router->get('/participante/inscricao/{codigoParticipante}/{codigoAtividade}', function ($codigoParticipante, $codigoAtividade) {
     $participante = (object) [
         'codInscricao' => 1
     ];
@@ -119,9 +119,9 @@ $router->get('/validar/{chave}', function ($chave) {
 
 $router->get('/participantes/login/{cpf}/{senha}', function ($cpf, $senha) {
     $participante = (object) [
-        'status'=> true
+        'status' => true
     ];
-    return json_encode($participante); 
+    return json_encode($participante);
 });
 
 $router->get('/participantes/cancelarInscricao/{codigoInscricao}', function ($codigoInscricao) {
@@ -135,33 +135,40 @@ $router->get('/participantes/ingresso/{codigoInscricao}', function ($codigoInscr
     $participante = (object) [
         'qrCode' => 'http://s.glbimg.com/jo/g1/f/original/2011/05/17/qrcode.jpg'
     ];
-    return json_encode($participante); 
+    return json_encode($participante);
 });
 
 //Palestrante
 $router->get('/palestrantes/listar/', 'PalestranteController@listarPalestrante');
 
-$router->post('/palestrantes/cadastrar', function() {
+$router->post('/palestrantes/cadastrar', function () {
     $body = dadosSessao();
     $palestrante = new PalestranteController();
 
     try {
-        $palestrante->cadastrarPalestrante($body['codPalestrante'], $body['nome'], $body['cpf'], $body['telefone'], $body['email'],
-            $body['area'], $body['biografia']);
-    } catch(Exception $e) {
+        $palestrante->cadastrarPalestrante(
+            $body['codPalestrante'],
+            $body['nome'],
+            $body['cpf'],
+            $body['telefone'],
+            $body['email'],
+            $body['area'],
+            $body['biografia']
+        );
+    } catch (Exception $e) {
         $response['erro'] = $e;
-        return response(json_encode($response), 500);
+        return response('', 500)->json($response);
     }
     $response['rs'] = 'true';
-    return response(json_encode($response), 400);
+    return response('', 400)->json($response);
 });
 
-$router->get('/palestrantes/alterar/{codigoPalestrante}/{mudancas}', function ($codigoPalestrante,$mudancas) {
+$router->get('/palestrantes/alterar/{codigoPalestrante}/{mudancas}', function ($codigoPalestrante, $mudancas) {
     $palestrante = (object) [
         'codPalestrante' => 123,
         'status' => "true"
     ];
-    return json_encode($palestrante);
+    return response()->json($palestrante);
 });
 
 $router->get('/palestrantes/visualizar/{codigoPalestrante}/', function ($codigoPalestrante) {
@@ -179,20 +186,20 @@ $router->get('/palestrantes/visualizar/{codigoPalestrante}/', function ($codigoP
 $router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
     $palestrante = array(
         array(
-        'codPalestrante' => 1,
-        'nome' => "Teste1",
-        'email' => "uniarp1@uniarp.com",
-        'cpf' => "11111111111",
-        'telefone' => "492222222",
-        'biografia' => "formado desde 2000, professor e palestrante"
+            'codPalestrante' => 1,
+            'nome' => "Teste1",
+            'email' => "uniarp1@uniarp.com",
+            'cpf' => "11111111111",
+            'telefone' => "492222222",
+            'biografia' => "formado desde 2000, professor e palestrante"
         ),
         array(
-        'codPalestrante' => 2,
-        'nome' => "Teste2",
-        'email' => "uniarp2@uniarp.com",
-        'cpf' => "22222222222",
-        'telefone' => "492222222",
-        'biografia' => "professor adjunto"
+            'codPalestrante' => 2,
+            'nome' => "Teste2",
+            'email' => "uniarp2@uniarp.com",
+            'cpf' => "22222222222",
+            'telefone' => "492222222",
+            'biografia' => "professor adjunto"
         )
     );
     return json_encode($palestrante);
@@ -200,14 +207,21 @@ $router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
 
 $router->get('/participantes/listar/', 'ParticipanteController@listarParticipante');
 
-$router->post('/participantes/cadastrar', function() {
+$router->post('/participantes/cadastrar', function () {
     $body = dadosSessao();
     $participante = new ParticipanteController();
 
     try {
-        $participante->cadastrarParticipante($body['codParticipante'], $body['nome'], $body['cpf'], $body['ra'], $body['senha'],
-            $body['telefone'], $body['email']);
-    } catch(Exception $e) {
+        $participante->cadastrarParticipante(
+            $body['codParticipante'],
+            $body['nome'],
+            $body['cpf'],
+            $body['ra'],
+            $body['senha'],
+            $body['telefone'],
+            $body['email']
+        );
+    } catch (Exception $e) {
         $responsea['erro'] = $e;
         return json_encode($responsea);
     }
@@ -218,13 +232,13 @@ $router->post('/participantes/cadastrar', function() {
 //Lsitar
 $router->get('/usuarios/listar', 'UsuarioController@listarUsuario');
 //cadastar
-$router->post('/usuarios/cadastrar', function() {
+$router->post('/usuarios/cadastrar', function () {
     $body = dadosSessao();
     $usuario = new UsuarioController();
 
     try {
         $usuario->cadastrarUsuario($body['codUsuario'], $body['nome'], $body['email'], $body['cpf'], $body['senha']);
-    } catch(Exception $e) {
+    } catch (Exception $e) {
         $responsea['erro'] = $e;
         return json_encode($responsea);
     }
@@ -232,29 +246,29 @@ $router->post('/usuarios/cadastrar', function() {
 });
 
 
-$router->delete('/participantes/excluir/{codParticipante}', function($codParticipante) {
+$router->delete('/participantes/excluir/{codParticipante}', function ($codParticipante) {
     return $codParticipante;
 });
 
 $router->get('/eventos/listarEvento/{codEvento}/', function ($codEvento) {
     $evento = (object) [
-        'codEvento'=> $codEvento,
-        'titulo'=> 'Teste 2',
-        'periodoInicial'=> '2020-10-10',
-        'periodoFinal'=> '2020-10-15',
-        'inscricaoInicio'=> '2020-09-20',
-        'inscricaoFim'=> '2020-10-05',
-        'qtdMinInscritos'=> 5,
-        'status'=> 'Aberto',
-        'qtdMaxInscritos'=> 20,
-        'modeloDoc'=> 'https;//modeloSead.png',
+        'codEvento' => $codEvento,
+        'titulo' => 'Teste 2',
+        'periodoInicial' => '2020-10-10',
+        'periodoFinal' => '2020-10-15',
+        'inscricaoInicio' => '2020-09-20',
+        'inscricaoFim' => '2020-10-05',
+        'qtdMinInscritos' => 5,
+        'status' => 'Aberto',
+        'qtdMaxInscritos' => 20,
+        'modeloDoc' => 'https;//modeloSead.png',
         'area' => ['Engenharia', 'Direiro'],
-        'equipe' => ['Mauricio','Delmison','Gabriel'],
+        'equipe' => ['Mauricio', 'Delmison', 'Gabriel'],
         'atividades' => ['Abertura', 'Palestra', 'Fechamento']
 
     ];
 
-    
+
 
     return json_encode($evento);
 });
@@ -262,13 +276,14 @@ $router->get('/eventos/listarEvento/{codEvento}/', function ($codEvento) {
 $router->get('/eventos/listarInscritos/{filtros}/', function ($filtros) {
     $inscritos = array(
         array(
-            'codInscrito'=> 1,
-            'Nome'=> 'Gabriel Soares',
-            'email'=> 'uniarp1@uniarp.com',
-            'cpf'=> '05335653025',
-            'telefone'=> '4998349562',
-            'senha'=> 'senha123',
-            'ra'=> '025960'),
+            'codInscrito' => 1,
+            'Nome' => 'Gabriel Soares',
+            'email' => 'uniarp1@uniarp.com',
+            'cpf' => '05335653025',
+            'telefone' => '4998349562',
+            'senha' => 'senha123',
+            'ra' => '025960'
+        ),
         array(
             'codInscrito' => 123,
             'nome' => 'Daniel Conte',
@@ -280,65 +295,64 @@ $router->get('/eventos/listarInscritos/{filtros}/', function ($filtros) {
         )
     );
 
-    return json_encode($inscritos); 
-
+    return json_encode($inscritos);
 });
 
 $router->get('/eventos/detalhesInscrito/{codInscrito}/', function ($codInscrito) {
     $inscrito = (object) [
-        'codInscrito'=> $codInscrito,
-        'Nome'=> 'Gabriel Soares',
-        'email'=> 'uniarp1@uniarp.com',
-        'cpf'=> '05335653025',
-        'telefone'=> '4998349562',
-        'senha'=> 'senha123',
-        'ra'=> '025960'
+        'codInscrito' => $codInscrito,
+        'Nome' => 'Gabriel Soares',
+        'email' => 'uniarp1@uniarp.com',
+        'cpf' => '05335653025',
+        'telefone' => '4998349562',
+        'senha' => 'senha123',
+        'ra' => '025960'
     ];
 
-    return json_encode($inscrito); 
+    return json_encode($inscrito);
 });
 
-$router->get('/eventos/cadastrar/{titulo}/{periodoInicial}/{periodoFinal}/{dtIncricaoInicio}/{dtIncricaoFim}/{qtdMinInscritos}/{qtdMaxInscritos}/{modeloDoc}/{area}/{equipe}/{atividades}', function ($titulo,$periodoInicial,$periodoFinal,$dtIncricaoInicio,$dtIncricaoFim,$qtdMinInscritos,$qtdMaxInscritos,$modeloDoc,$area,$equipe,$atividades) {
+$router->get('/eventos/cadastrar/{titulo}/{periodoInicial}/{periodoFinal}/{dtIncricaoInicio}/{dtIncricaoFim}/{qtdMinInscritos}/{qtdMaxInscritos}/{modeloDoc}/{area}/{equipe}/{atividades}', function ($titulo, $periodoInicial, $periodoFinal, $dtIncricaoInicio, $dtIncricaoFim, $qtdMinInscritos, $qtdMaxInscritos, $modeloDoc, $area, $equipe, $atividades) {
     $evento = (object) [
-        'codEvento'=> 1,
-        'titulo'=> 'Teste 1',
-        'periodoInicial'=> '2020-10-10',
-        'periodoFinal'=> '2020-10-15',
-        'inscricaoInicio'=> '2020-09-20',
-        'inscricaoFim'=> '2020-10-05',
-        'qtdMinInscritos'=> 5,
-        'status'=> 'Aberto',
-        'qtdMaxInscritos'=> 20,
-        'modeloDoc'=> 'https;//modeloTeste1.png',
+        'codEvento' => 1,
+        'titulo' => 'Teste 1',
+        'periodoInicial' => '2020-10-10',
+        'periodoFinal' => '2020-10-15',
+        'inscricaoInicio' => '2020-09-20',
+        'inscricaoFim' => '2020-10-05',
+        'qtdMinInscritos' => 5,
+        'status' => 'Aberto',
+        'qtdMaxInscritos' => 20,
+        'modeloDoc' => 'https;//modeloTeste1.png',
         'area' => ['Engenharia', 'Direiro'],
-        'equipe' => ['Mauricio','Delmison','Gabriel'],
+        'equipe' => ['Mauricio', 'Delmison', 'Gabriel'],
         'atividades' => ['Abertura', 'Palestra', 'Fechamento']
 
     ];
 
-    
 
-    return json_encode($evento);  
+
+    return json_encode($evento);
 });
 
-$router->get('/eventos/alterar/{codigoEvento}/{mudancas}/', function ($codigoEvento,$mudancas) {
+$router->get('/eventos/alterar/{codigoEvento}/{mudancas}/', function ($codigoEvento, $mudancas) {
     $evento = (object) [
-        'codEvento'=> $codigoEvento,
-        'titulo'=> 'Teste 2',
-        'periodoInicial'=> '2020-10-10',
-        'periodoFinal'=> '2020-10-15',
-        'inscricaoInicio'=> '2020-09-20',
-        'inscricaoFim'=> '2020-10-05',
-        'qtdMinInscritos'=> 5,
-        'status'=> 'Aberto',
-        'qtdMaxInscritos'=> 20,
-        'modeloDoc'=> 'https://modeloTeste2.png',
+        'codEvento' => $codigoEvento,
+        'titulo' => 'Teste 2',
+        'periodoInicial' => '2020-10-10',
+        'periodoFinal' => '2020-10-15',
+        'inscricaoInicio' => '2020-09-20',
+        'inscricaoFim' => '2020-10-05',
+        'qtdMinInscritos' => 5,
+        'status' => 'Aberto',
+        'qtdMaxInscritos' => 20,
+        'modeloDoc' => 'https://modeloTeste2.png',
         'area' => ['Engenharia', 'Direiro'],
-        'equipe' => ['Mauricio','Delmison','Gabriel'],
+        'equipe' => ['Mauricio', 'Delmison', 'Gabriel'],
         'atividades' => ['Abertura', 'Palestra', 'Fechamento']
     ];
 
-    return json_encode($evento);  
+    return json_encode($evento);
 });
 
 $router->get('/eventos/excluir/{codigoEvento}', function ($codigoEvento) {
@@ -346,7 +360,7 @@ $router->get('/eventos/excluir/{codigoEvento}', function ($codigoEvento) {
         'status' => true
     ];
 
-    return json_encode($evento);  
+    return json_encode($evento);
 });
 
 $router->get('/eventos/cancelar/{codigoEvento}', function ($codigoEvento) {
@@ -355,7 +369,7 @@ $router->get('/eventos/cancelar/{codigoEvento}', function ($codigoEvento) {
         'status' => 'true'
     ];
 
-    return json_encode($evento);  
+    return json_encode($evento);
 });
 
 $router->get('/eventos/listar/{filtros}', function ($filtros) {
@@ -388,7 +402,8 @@ $router->get('/eventos/listar/{filtros}', function ($filtros) {
     return json_encode($evento);
 });
 
-function dadosSessao() {
+function dadosSessao()
+{
     $request = new Request();
     return $request->json()->all();
 }
