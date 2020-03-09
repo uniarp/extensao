@@ -140,7 +140,7 @@ $router->get('/participantes/ingresso/{codigoInscricao}', function ($codigoInscr
 });
 
 //Palestrante
-$router->get('/palestrantes/listar/', 'PalestranteController@listarPalestrante');
+$router->get('/palestrantes/listar', 'PalestranteController@listarPalestrante');
 
 $router->post('/palestrantes/cadastrar', function () {
     $body = dadosSessao();
