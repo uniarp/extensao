@@ -9,7 +9,7 @@ class PalestranteController extends BaseController {
     
     public function listarPalestrante() {
         $palestrantes = app('db')->select("SELECT p.codpalestrante, p.nome, p.cpf, p.telefone, p.email, p.biografia FROM palestrante p;");
-        $palestrantes = (array) json_decode($palestrantes);
+        $palestrantes = json_decode(json_encode($palestrantes), true);
         for ($i = 0; $i < count($palestrantes); $i++) { 
             $cod = $palestrantes[$i]['codpalestrante'];
             $areasPalestrante = app('db')->select("SELECT p.codareapalestrante, a.codarea, a.nome FROM areapalestrante p
