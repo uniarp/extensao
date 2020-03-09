@@ -221,12 +221,14 @@ $router->post('/participantes/cadastrar', function () {
         $body['telefone'],
         $body['email']
     );
-    return response('true', 400);
+    return response('true', 200);
 });
 
-//Usuario
-//Lsitar
+/* USUÁRIO */
+
+//Listar
 $router->get('/usuarios/listar', 'UsuarioController@listarUsuario');
+
 //cadastar
 $router->post('/usuarios/cadastrar', function () {
     $body = dadosSessao();
@@ -235,12 +237,11 @@ $router->post('/usuarios/cadastrar', function () {
     try {
         $usuario->cadastrarUsuario($body['codUsuario'], $body['nome'], $body['email'], $body['cpf'], $body['senha']);
     } catch (Exception $e) {
-        $responsea['erro'] = $e;
-        return json_encode($responsea);
+        $response['erro'] = $e;
+        return response($response, 400);
     }
-    return true;
+    return response('true', 200);
 });
-
 
 $router->delete('/participantes/excluir/{codParticipante}', function ($codParticipante) {
     return $codParticipante;
