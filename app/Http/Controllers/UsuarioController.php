@@ -26,8 +26,14 @@ class UsuarioController extends BaseController
                 // return app('db')->select($query);
             }
         } catch (Exception $e) {
-            $responsea['erro'] = $e.'Falha';
+            $responsea['erro'] = $e . 'Falha';
             return $responsea;
         }
+    }
+
+    public function excluirUsuario($codUsuario)
+    {
+        $query = "DELETE FROM usuario WHERE codusuario = '" . $codUsuario . "'";
+        return app('db')->select($query);
     }
 }

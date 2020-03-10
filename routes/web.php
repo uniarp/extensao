@@ -144,6 +144,10 @@ $router->post('/palestrantes/cadastrar', function () {
     return response('', 400)->json($response);
 });
 
+//excluir
+$router->delete('/palestrantes/excluir/{codPalestrante}', 'PalestranteController@excluirPalestrante');
+
+
 /* PARTICIPANTE */
 //Listar
 $router->get('/participantes/listar/', 'ParticipanteController@listarParticipante');
@@ -190,6 +194,10 @@ $router->post('/usuarios/cadastrar', function () {
     }
     return response('true', 200);
 });
+
+//Excluir
+$router->delete('/usuarios/excluir/{codUsuario}', 'UsuarioController@excluirUsuario');
+
 
 $router->get('/eventos/listarEvento/{codEvento}/', function ($codEvento) {
     $evento = (object) [
