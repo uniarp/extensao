@@ -19,7 +19,7 @@ class PalestranteController extends BaseController {
         return $palestrantes;
     }
 
-    public function cadastrarPalestrante($codPalestrante, $nome, $cpf, $telefone, $email, $biografia) {
+    public function gravarPalestrante($codPalestrante, $nome, $cpf, $telefone, $email, $biografia) {
         if ($codPalestrante === null) {
             $query = 'INSERT INTO palestrante ("nome", "cpf", "telefone", "email", "biografia") VALUES (';
             $query .= "'" . $nome . "', '" . $cpf . "', '" . $telefone . "', '" . $email . "', '" . $biografia . "');";

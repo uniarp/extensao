@@ -11,7 +11,7 @@ class ParticipanteController extends BaseController {
         return app('db')->select("SELECT p.codparticipante cod, p.nome, p.cpf, p.ra, p.telefone, p.email FROM participante p;");
     }
 
-    public function cadastrarParticipante($codParticipante, $nome, $cpf, $ra, $senha, $telefone, $email) {
+    public function gravarParticipante($codParticipante, $nome, $cpf, $ra, $senha, $telefone, $email) {
         if ($codParticipante === null) {
             $query = 'INSERT INTO participante ("nome", "cpf", "ra", "senha", "telefone", "email") VALUES (';
             $query .= "'" . $nome . "', '" . $cpf . "', '" . $ra . "', '" . $senha . "', '" . $telefone . "', '" . $email . "');";

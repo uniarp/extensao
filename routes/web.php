@@ -127,7 +127,7 @@ $router->post('/palestrantes/cadastrar', function () {
     $palestrante = new PalestranteController();
 
     try {
-        $palestrante->cadastrarPalestrante(
+        $palestrante->gravarPalestrante(
             $body['codPalestrante'],
             $body['nome'],
             $body['cpf'],
@@ -154,7 +154,7 @@ $router->post('/participantes/cadastrar', function () {
     $participante = new ParticipanteController();
 
     try {
-        $participante->cadastrarParticipante(
+        $participante->gravarParticipante(
             $body['codParticipante'],
             $body['nome'],
             $body['cpf'],
