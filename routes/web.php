@@ -117,31 +117,11 @@ $router->get('/validar/{chave}', function ($chave) {
     return '{status:false}';
 });
 
-
-$router->get('/participantes/login/{cpf}/{senha}', function ($cpf, $senha) {
-    $participante = (object) [
-        'status' => true
-    ];
-    return json_encode($participante);
-});
-
-$router->get('/participantes/cancelarInscricao/{codigoInscricao}', function ($codigoInscricao) {
-    $participante = (object) [
-        'status' => "true"
-    ];
-    return json_encode($participante);
-});
-
-$router->get('/participantes/ingresso/{codigoInscricao}', function ($codigoInscricao) {
-    $participante = (object) [
-        'qrCode' => 'http://s.glbimg.com/jo/g1/f/original/2011/05/17/qrcode.jpg'
-    ];
-    return json_encode($participante);
-});
-
-//Palestrante
+/* PALESTRANTE */
+//Listar
 $router->get('/palestrantes/listar', 'PalestranteController@listarPalestrante');
 
+// Alterar ou Cadastar novo Palestrante
 $router->post('/palestrantes/cadastrar', function () {
     $body = dadosSessao();
     $palestrante = new PalestranteController();
@@ -164,50 +144,11 @@ $router->post('/palestrantes/cadastrar', function () {
     return response('', 400)->json($response);
 });
 
-$router->get('/palestrantes/alterar/{codigoPalestrante}/{mudancas}', function ($codigoPalestrante, $mudancas) {
-    $palestrante = (object) [
-        'codPalestrante' => 123,
-        'status' => "true"
-    ];
-    return response()->json($palestrante);
-});
-
-$router->get('/palestrantes/visualizar/{codigoPalestrante}/', function ($codigoPalestrante) {
-    $palestrante = (object) [
-        'codPalestrante' => 123,
-        'nome' => "teste",
-        'email' => "uniarp1@uniarp.com",
-        'cpf' => "05335653025",
-        'telefone' => "4998349562",
-        'biografia' => "formado desde 2000, professor e palestrante"
-    ];
-    return json_encode($palestrante);
-});
-
-$router->get('/palestrantes/listar/{filtros}/', function ($filtros) {
-    $palestrante = array(
-        array(
-            'codPalestrante' => 1,
-            'nome' => "Teste1",
-            'email' => "uniarp1@uniarp.com",
-            'cpf' => "11111111111",
-            'telefone' => "492222222",
-            'biografia' => "formado desde 2000, professor e palestrante"
-        ),
-        array(
-            'codPalestrante' => 2,
-            'nome' => "Teste2",
-            'email' => "uniarp2@uniarp.com",
-            'cpf' => "22222222222",
-            'telefone' => "492222222",
-            'biografia' => "professor adjunto"
-        )
-    );
-    return json_encode($palestrante);
-});
-
+/* PARTICIPANTE */
+//Listar
 $router->get('/participantes/listar/', 'ParticipanteController@listarParticipante');
 
+//Cadastrar
 $router->post('/participantes/cadastrar', function () {
     $body = dadosSessao();
     $participante = new ParticipanteController();
@@ -229,8 +170,10 @@ $router->post('/participantes/cadastrar', function () {
     return response('true', 200);
 });
 
-/* USUÁRIO */
+//Excluir
+$router->delete('/participantes/excluir/{codParticipante}', 'UsuarioController@excluirParticipante($codParticipante)');
 
+/* USUÁRIO */
 //Listar
 $router->get('/usuarios/listar', 'UsuarioController@listarUsuario');
 
@@ -246,10 +189,6 @@ $router->post('/usuarios/cadastrar', function () {
         return response($response, 400);
     }
     return response('true', 200);
-});
-
-$router->delete('/participantes/excluir/{codParticipante}', function ($codParticipante) {
-    return $codParticipante;
 });
 
 $router->get('/eventos/listarEvento/{codEvento}/', function ($codEvento) {
