@@ -171,7 +171,7 @@ $router->post('/participantes/cadastrar', function () {
 });
 
 //Excluir
-$router->post('/participantes/excluir/{codParticipante}', 'ParticipanteController@excluirParticipante($codParticipante)');
+$router->post('/participantes/excluir/{codParticipante}', 'ParticipanteController@excluirParticipante');
 
 /* USUÁRIO */
 //Listar
