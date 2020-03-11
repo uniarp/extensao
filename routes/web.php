@@ -156,7 +156,7 @@ $router->post('/participantes/cadastrar', function () {
     $participante = new ParticipanteController();
 
     try {
-        $participante->gravarParticipante(
+        $response = $participante->gravarParticipante(
             $body['codParticipante'],
             $body['nome'],
             $body['cpf'],
@@ -169,7 +169,7 @@ $router->post('/participantes/cadastrar', function () {
         $response['erro'] = $e;
         return response($response, 400);
     }
-    return response('true', 200);
+    return response($response, 200);
 });
 
 //Excluir
