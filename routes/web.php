@@ -125,7 +125,6 @@ $router->get('/palestrantes/listar', 'PalestranteController@listarPalestrante');
 $router->post('/palestrantes/cadastrar', function () {
     $body = dadosSessao();
     $palestrante = new PalestranteController();
-
     try {
         $palestrante->gravarPalestrante(
             $body['codPalestrante'],
@@ -140,7 +139,6 @@ $router->post('/palestrantes/cadastrar', function () {
         $response['erro'] = $e;
         return response($response, 400);
     }
-    $response['rs'] = 'true';
     return response($response, 200);
 });
 
@@ -187,7 +185,13 @@ $router->post('/usuarios/cadastrar', function () {
     $usuario = new UsuarioController();
 
     try {
-        $usuario->cadastrarUsuario($body['codUsuario'], $body['nome'], $body['email'], $body['cpf'], $body['senha']);
+        $usuario->cadastrarUsuario(
+            $body['codUsuario'],
+            $body['nome'],
+            $body['email'],
+            $body['cpf'],
+            $body['senha']
+        );
     } catch (Exception $e) {
         $response['erro'] = $e;
         return response($response, 400);
