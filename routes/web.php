@@ -138,10 +138,10 @@ $router->post('/palestrantes/cadastrar', function () {
         );
     } catch (Exception $e) {
         $response['erro'] = $e;
-        return response('', 500)->json($response);
+        return response($response, 400);
     }
     $response['rs'] = 'true';
-    return response('', 400)->json($response);
+    return response('true', 200);
 });
 
 //excluir
