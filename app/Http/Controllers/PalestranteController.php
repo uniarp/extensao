@@ -31,7 +31,7 @@ class PalestranteController extends BaseController
             $codPalestrante = json_decode(json_encode($codPalestrante), true);
             $area = json_decode(json_encode($area), true);
             foreach ($area as $key) {
-                return $key;
+                return $codPalestrante['codpalestrante'];
                 $codArea = $key['codArea'];
                 $codPalestrante = $codPalestrante['codpalestrante'];
                 $queryArea = 'INSERT INTO areapalestrante("codarea", "codpalestrante") VALUES (';
