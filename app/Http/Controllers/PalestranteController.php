@@ -28,7 +28,7 @@ class PalestranteController extends BaseController
             $query .= "'" . $nome . "', '" . $cpf . "', '" . $telefone . "', '" . $email . "', '" . $biografia . "');";
             app('db')->select($query);
             $codPalestrante = app('db')->select('SELECT MAX(p.codpalestrante) as codpalestrante FROM palestrante p;');
-            $codPalestrante = json_decode(json_encode($codPalestrante), true);
+            return $codPalestrante = json_decode(json_encode($codPalestrante), true);
             foreach ($area as $key) {
                 $queryArea .= "INSERT INTO areapalestrante(codarea, codpalestrante) VALUES (" . $key['codArea'] . "," . $codPalestrante['codpalestrante'] . ');';
                 app('db')->select($queryArea);
