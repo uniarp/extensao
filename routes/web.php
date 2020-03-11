@@ -133,7 +133,6 @@ $router->post('/palestrantes/cadastrar', function () {
             $body['cpf'],
             $body['telefone'],
             $body['email'],
-            $body['area'],
             $body['biografia'],
             $body['area']
         );
