@@ -34,6 +34,7 @@ class PalestranteController extends BaseController
                 $codPalestrante = $codPalestrante['codpalestrante'];
                 $queryArea = 'INSERT INTO areapalestrante("codarea", "codpalestrante") VALUES (';
                 $queryArea .= "'" . $codArea . "', " . $codPalestrante . "');";
+                return $queryArea;
                 app('db')->select($queryArea);
             }
         } else {
