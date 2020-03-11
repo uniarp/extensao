@@ -19,11 +19,14 @@ class PalestranteController extends BaseController {
         return $palestrantes;
     }
 
-    public function gravarPalestrante($codPalestrante, $nome, $cpf, $telefone, $email, $biografia) {
+    public function gravarPalestrante($codPalestrante, $nome, $cpf, $telefone, $email, $biografia, $area) {
         if ($codPalestrante === null) {
             $query = 'INSERT INTO palestrante ("nome", "cpf", "telefone", "email", "biografia") VALUES (';
             $query .= "'" . $nome . "', '" . $cpf . "', '" . $telefone . "', '" . $email . "', '" . $biografia . "');";
-            return app('db')->select($query);
+            for ($i = 0; $i < strlen($area)); $i++ {
+                $queryArea .= "INSERT INTO areapalestrante(codarea, codpalestrante) VALUES (".$area[$i].",".$codPalestrante.');\n';
+            }
+            return app('db')->select($query, $queryArea);
         } else {
             $query = "UPDATE participante SET nome = '" . $nome . "', cpf = '" . $cpf . "', telefone = '" . $telefone . "', email = '" . $email . "', biografia = '" . $biografia . "', email = ' WHERE codparticipante = " . $codPalestrante . ";";
             return app('db')->select($query);

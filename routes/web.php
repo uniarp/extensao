@@ -134,7 +134,8 @@ $router->post('/palestrantes/cadastrar', function () {
             $body['telefone'],
             $body['email'],
             $body['area'],
-            $body['biografia']
+            $body['biografia'],
+            $body['area']
         );
     } catch (Exception $e) {
         $response['erro'] = $e;
