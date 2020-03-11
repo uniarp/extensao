@@ -28,6 +28,8 @@ class PalestranteController extends BaseController
             $query .= "'" . $nome . "', '" . $cpf . "', '" . $telefone . "', '" . $email . "', '" . $biografia . "');";
             app('db')->select($query);
             $codPalestrante = app('db')->select('SELECT MAX(p.codpalestrante) as codpalestrante FROM palestrante p;');
+            $codPalestrante = json_decode(json_encode($codPalestrante), true);
+            $area = json_decode(json_encode($area), true);
             foreach ($area as $key) {
                 return $codPalestrante[0]['codpalestrante'];
                 $codArea = $key['codArea'];
