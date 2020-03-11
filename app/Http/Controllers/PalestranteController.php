@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
 
-class PalestranteController extends BaseController {
-    
-    public function listarPalestrante() {
+class PalestranteController extends BaseController
+{
+
+    public function listarPalestrante()
+    {
         $palestrantes = app('db')->select("SELECT p.codpalestrante, p.nome, p.cpf, p.telefone, p.email, p.biografia FROM palestrante p;");
         $palestrantes = json_decode(json_encode($palestrantes), true);
-        for ($i = 0; $i < count($palestrantes); $i++) { 
+        for ($i = 0; $i < count($palestrantes); $i++) {
             $cod = $palestrantes[$i]['codpalestrante'];
             $areasPalestrante = app('db')->select("SELECT p.codareapalestrante, a.codarea, a.nome FROM areapalestrante p
             JOIN area a ON a.codarea = p.codarea WHERE p.codpalestrante = '" . $cod . "';");
@@ -19,21 +21,26 @@ class PalestranteController extends BaseController {
         return $palestrantes;
     }
 
-    public function gravarPalestrante($codPalestrante, $nome, $cpf, $telefone, $email, $biografia, $area) {
+    public function gravarPalestrante($codPalestrante, $nome, $cpf, $telefone, $email, $biografia, $area)
+    {
         if ($codPalestrante === null) {
             $query = 'INSERT INTO palestrante ("nome", "cpf", "telefone", "email", "biografia") VALUES (';
             $query .= "'" . $nome . "', '" . $cpf . "', '" . $telefone . "', '" . $email . "', '" . $biografia . "');";
-            for ($i = 0; $i < strlen($area)); $i++ {
-                $queryArea .= "INSERT INTO areapalestrante(codarea, codpalestrante) VALUES (".$area[$i].",".$codPalestrante.');\n';
+            app('db')->select($query);
+            $codPalestrante = app('db')->select('SELECT MAX(p.codpalestrante) as codpalestrante FROM palestrante p;');
+            $codPalestrante = json_decode(json_encode($codPalestrante), true);
+            foreach ($area as $key) {
+                $queryArea .= "INSERT INTO areapalestrante(codarea, codpalestrante) VALUES (" . $key['codArea'] . "," . $codPalestrante['codpalestrante'] . ');';
+                app('db')->select($queryArea);
             }
-            return app('db')->select($query, $queryArea);
         } else {
             $query = "UPDATE participante SET nome = '" . $nome . "', cpf = '" . $cpf . "', telefone = '" . $telefone . "', email = '" . $email . "', biografia = '" . $biografia . "', email = ' WHERE codparticipante = " . $codPalestrante . ";";
             return app('db')->select($query);
         }
     }
 
-    public function excluirPalestrante($codPalestrante) {
+    public function excluirPalestrante($codPalestrante)
+    {
         $query = "DELETE FROM palestrante WHERE codpalestrante = '" . $codPalestrante . "'";
         return app('db')->select($query);
     }
