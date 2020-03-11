@@ -29,7 +29,7 @@ class PalestranteController extends BaseController
             app('db')->select($query);
             $codPalestrante = app('db')->select('SELECT MAX(p.codpalestrante) as codpalestrante FROM palestrante p;');
             foreach ($area as $key) {
-                return $codPalestrante['codpalestrante'];
+                return $codPalestrante[0]['codpalestrante'];
                 $codArea = $key['codArea'];
                 $codPalestrante = $codPalestrante['codpalestrante'];
                 $queryArea = 'INSERT INTO areapalestrante("codarea", "codpalestrante") VALUES (';
