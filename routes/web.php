@@ -141,7 +141,7 @@ $router->post('/palestrantes/cadastrar', function () {
         return response($response, 400);
     }
     $response['rs'] = 'true';
-    return response($response, 200);
+    return response('true', 200);
 });
 
 //excluir
