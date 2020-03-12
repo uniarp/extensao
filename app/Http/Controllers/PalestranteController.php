@@ -32,11 +32,10 @@ class PalestranteController extends BaseController
             $area = json_decode(json_encode($area), true);
             $codPalestrante = $codPalestrante[0]['codpalestrante'];
             for($a = 0;  $a < count($area); $a++) {
-                
                 $codArea = $area[$a]['codArea'];
-                if ($a == 1) {
-                    return $codPalestrante;
-                }
+                // if ($a == 1) {
+                //     return $codPalestrante;
+                // }
                 $queryArea = 'INSERT INTO areapalestrante("codarea", "codpalestrante") VALUES (';
                 $queryArea .= "'" . $codArea . "', '" . $codPalestrante . "');";
                 app('db')->select($queryArea);
