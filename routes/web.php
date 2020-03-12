@@ -126,7 +126,7 @@ $router->post('/palestrantes/cadastrar', function () {
     $body = dadosSessao();
     $palestrante = new PalestranteController();
     try {
-        $palestrante->gravarPalestrante(
+        $response = $palestrante->gravarPalestrante(
             $body['codPalestrante'],
             $body['nome'],
             $body['cpf'],
@@ -156,7 +156,7 @@ $router->post('/participantes/cadastrar', function () {
     $participante = new ParticipanteController();
 
     try {
-        $response = $participante->gravarParticipante(
+        $participante->gravarParticipante(
             $body['codParticipante'],
             $body['nome'],
             $body['cpf'],
@@ -169,7 +169,7 @@ $router->post('/participantes/cadastrar', function () {
         $response['erro'] = $e;
         return response($response, 400);
     }
-    return response($response, 200);
+    return response('true', 200);
 });
 
 //Excluir
