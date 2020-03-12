@@ -38,7 +38,6 @@ class PalestranteController extends BaseController
                 return $queryArea;
                 app('db')->select($queryArea);
             }
-            return $teste;
         } else {
             $query = "UPDATE participante SET nome = '" . $nome . "', cpf = '" . $cpf . "', telefone = '" . $telefone . "', email = '" . $email . "', biografia = '" . $biografia . "', email = ' WHERE codparticipante = " . $codPalestrante . ";";
             return app('db')->select($query);
