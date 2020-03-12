@@ -117,6 +117,9 @@ $router->get('/validar/{chave}', function ($chave) {
     return '{status:false}';
 });
 
+/*AREA*/
+$router->get('/areas/listar', 'AreaController@listarArea');
+
 /* PALESTRANTE */
 //Listar
 $router->get('/palestrantes/listar', 'PalestranteController@listarPalestrante');
