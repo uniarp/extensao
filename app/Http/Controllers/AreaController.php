@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class AreaController extends BaseController {
 
     public function listarArea() {
-        return app('db')->select('SELECT a.codarea, a.nome FROM area a;');
+        return app('db')->select('SELECT a.codarea "codArea", a.nome FROM area a;');
     }
 
 }
