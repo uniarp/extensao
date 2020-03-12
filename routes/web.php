@@ -126,7 +126,7 @@ $router->post('/palestrantes/cadastrar', function () {
     $body = dadosSessao();
     $palestrante = new PalestranteController();
     try {
-        $response = $palestrante->gravarPalestrante(
+        $palestrante->gravarPalestrante(
             $body['codPalestrante'],
             $body['nome'],
             $body['cpf'],
@@ -139,7 +139,7 @@ $router->post('/palestrantes/cadastrar', function () {
         $response['erro'] = $e;
         return response($response, 400);
     }
-    return response($response, 200);
+    return response('true', 200);
 });
 
 //excluir
