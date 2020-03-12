@@ -30,15 +30,15 @@ class PalestranteController extends BaseController
             $codPalestrante = app('db')->select('SELECT MAX(p.codpalestrante) as codpalestrante FROM palestrante p;');
             $codPalestrante = json_decode(json_encode($codPalestrante), true);
             $area = json_decode(json_encode($area), true);
+            $codPalestrante = $codPalestrante[0]['codpalestrante'];
             for($a = 0;  $a < count($area); $a++) {
                 
                 $codArea = $area[$a]['codArea'];
-                $codPalestrante = $codPalestrante[0]['codpalestrante'];
+                if ($a == 1) {
+                    return $codPalestrante;
+                }
                 $queryArea = 'INSERT INTO areapalestrante("codarea", "codpalestrante") VALUES (';
                 $queryArea .= "'" . $codArea . "', '" . $codPalestrante . "');";
-                if ($a == 0) {
-                    return $queryArea;
-                }
                 app('db')->select($queryArea);
             }
         } else {
