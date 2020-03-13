@@ -122,7 +122,10 @@ $router->get('/areas/listar', 'AreaController@listarArea');
 
 /* PALESTRANTE */
 //Listar
-$router->get('/palestrantes/listar', 'PalestranteController@listarPalestrante');
+$router->get('/palestrantes/listar', 'PalestranteController@listarPalestrantes');
+
+//listar por codigo
+$router->get('/palestrantes/listar/{codPalestrante}', 'PalestranteController@listarPalestrante');
 
 // Alterar ou Cadastar novo Palestrante
 $router->post('/palestrantes/cadastrar', function () {
@@ -180,7 +183,9 @@ $router->delete('/participantes/excluir/{codParticipante}', 'ParticipanteControl
 
 /* USUÁRIO */
 //Listar
-$router->get('/usuarios/listar', 'UsuarioController@listarUsuario');
+$router->get('/usuarios/listar', 'UsuarioController@listarUsuarios');
+//listar por codigo
+$router->get('/usuarios/listar/{codUsuario}', 'UsuarioController@listarUsuario');
 
 //cadastar
 $router->post('/usuarios/cadastrar', function () {

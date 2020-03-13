@@ -8,9 +8,22 @@ use Illuminate\Support\Facades\DB;
 class PalestranteController extends BaseController
 {
 
-    public function listarPalestrante()
+    public function listarPalestrantes()
     {
-        $palestrantes = app('db')->select("SELECT p.codpalestrante, p.nome, p.cpf, p.telefone, p.email, p.biografia FROM palestrante p;");
+        $palestrantes = app('db')->select('SELECT p.codpalestrante "codPalestrante", p.nome, p.cpf, p.telefone, p.email, p.biografia FROM palestrante p;');
+        $palestrantes = json_decode(json_encode($palestrantes), true);
+        for ($i = 0; $i < count($palestrantes); $i++) {
+            $cod = $palestrantes[$i]['codpalestrante'];
+            $areasPalestrante = app('db')->select("SELECT p.codareapalestrante, a.codarea, a.nome FROM areapalestrante p
+            JOIN area a ON a.codarea = p.codarea WHERE p.codpalestrante = '" . $cod . "';");
+            $palestrantes[$i]['areasPalestante'] =  $areasPalestrante;
+        }
+        return $palestrantes;
+    }
+
+    public function listarPalestrante($codPalestrante)
+    {
+        $palestrantes = app('db')->select('SELECT p.codpalestrante "codPalestrante", p.nome, p.cpf, p.telefone, p.email, p.biografia FROM palestrante p where p.codPalestrante ='.$codPalestrante.';');
         $palestrantes = json_decode(json_encode($palestrantes), true);
         for ($i = 0; $i < count($palestrantes); $i++) {
             $cod = $palestrantes[$i]['codpalestrante'];

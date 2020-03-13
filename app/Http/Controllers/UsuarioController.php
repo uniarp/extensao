@@ -6,13 +6,22 @@ use Exception;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
 
-class UsuarioController extends BaseController {
+class UsuarioController extends BaseController
+{
 
-    public function listarUsuario() {
+    public function listarUsuarios()
+    {
         return app('db')->select('SELECT u.codusuario "codUsuario", u.nome, u.email, u.cpf, u.senha FROM usuario u;');
     }
 
-    public function cadastrarUsuario($codUsuario, $nome, $email, $cpf, $senha) {
+    public function listarUsuario($codUsuario)
+    {
+        $query = 'SELECT u.codusuario "codUsuario", u.nome, u.email, u.cpf, u.senha FROM usuario u WHERE u.codusuario ='. $codUsuario .";";
+        return app('db')->select($query);
+    }
+
+    public function cadastrarUsuario($codUsuario, $nome, $email, $cpf, $senha)
+    {
         if ($codUsuario === null) {
             $query = 'INSERT INTO usuario ( "nome", "email", "cpf", "senha" ) VALUES (';
             $query .= "'" . $nome . "', '" . $email . "', '" . $cpf . "', '" . $senha . "');";
@@ -28,7 +37,8 @@ class UsuarioController extends BaseController {
         }
     }
 
-    public function excluirUsuario($codUsuario) {
+    public function excluirUsuario($codUsuario)
+    {
         $query = "DELETE FROM usuario WHERE codusuario = '" . $codUsuario . "'";
         return app('db')->select($query);
     }
