@@ -13,7 +13,7 @@ class PalestranteController extends BaseController
         $palestrantes = app('db')->select('SELECT p.codpalestrante "codPalestrante", p.nome, p.cpf, p.telefone, p.email, p.biografia FROM palestrante p;');
         $palestrantes = json_decode(json_encode($palestrantes), true);
         for ($i = 0; $i < count($palestrantes); $i++) {
-            $cod = $palestrantes[$i]['codpalestrante'];
+            $cod = $palestrantes[$i]['codPalestrante'];
             $areasPalestrante = app('db')->select("SELECT p.codareapalestrante, a.codarea, a.nome FROM areapalestrante p
             JOIN area a ON a.codarea = p.codarea WHERE p.codpalestrante = '" . $cod . "';");
             $palestrantes[$i]['areasPalestante'] =  $areasPalestrante;
@@ -26,7 +26,7 @@ class PalestranteController extends BaseController
         $palestrantes = app('db')->select('SELECT p.codpalestrante "codPalestrante", p.nome, p.cpf, p.telefone, p.email, p.biografia FROM palestrante p where p.codPalestrante ='.$codPalestrante.';');
         $palestrantes = json_decode(json_encode($palestrantes), true);
         for ($i = 0; $i < count($palestrantes); $i++) {
-            $cod = $palestrantes[$i]['codpalestrante'];
+            $cod = $palestrantes[$i]['codPalestrante'];
             $areasPalestrante = app('db')->select("SELECT p.codareapalestrante, a.codarea, a.nome FROM areapalestrante p
             JOIN area a ON a.codarea = p.codarea WHERE p.codpalestrante = '" . $cod . "';");
             $palestrantes[$i]['areasPalestante'] =  $areasPalestrante;
