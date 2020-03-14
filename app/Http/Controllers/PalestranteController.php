@@ -27,9 +27,9 @@ class PalestranteController extends BaseController
         $palestrantes = json_decode(json_encode($palestrantes), true);
         for ($i = 0; $i < count($palestrantes); $i++) {
             $cod = $palestrantes[$i]['codPalestrante'];
-            $areasPalestrante = app('db')->select('SELECT  a.codareapalestrante "codAreaPalestrante", a.codarea "codArea" FROM areapalestrante p
-            JOIN area a ON a.codarea = p.codarea WHERE p.codpalestrante = ' . $cod . ";");
-            $palestrantes[$i]['area'] =  $areasPalestrante;
+            $areasPalestrante = app('db')->select('SELECT  p.codareapalestrante "codAreaPalestrante", p.codarea "codArea" FROM areapalestrante p
+            WHERE p.codpalestrante = ' . $cod . ";");
+            $palestrantes[$i]['areaPalestrante'] =  $areasPalestrante;
         }
         return $palestrantes;
     }
