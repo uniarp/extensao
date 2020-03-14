@@ -42,6 +42,7 @@ class PalestranteController extends BaseController
             app('db')->select($query);
             $codPalestrante = app('db')->select('SELECT MAX(p.codpalestrante) as codpalestrante FROM palestrante p;');
             $codPalestrante = json_decode(json_encode($codPalestrante), true);
+            return $area;
             $area = json_decode(json_encode($area), true);
             $codPalestrante = $codPalestrante[0]['codpalestrante'];
             for($a = 0;  $a < count($area); $a++) {
