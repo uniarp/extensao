@@ -50,7 +50,8 @@ class PalestranteController extends BaseController
                 app('db')->select($queryArea);
             }
         } else {
-            $query = "UPDATE participante SET nome = '" . $nome . "', cpf = '" . $cpf . "', telefone = '" . $telefone . "', email = '" . $email . "', biografia = '" . $biografia . "', email = ' WHERE codparticipante = " . $codPalestrante . ";";
+            $query = "UPDATE participante SET nome = '" . $nome . "', cpf = '" . $cpf . "', telefone = '" . $telefone . "', email = '"
+             . $email . "', biografia = '" . $biografia . "' WHERE codparticipante =" . $codPalestrante . ";";
             return app('db')->select($query);
         }
     }
