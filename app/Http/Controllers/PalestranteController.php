@@ -24,10 +24,11 @@ class PalestranteController extends BaseController
     public function listarPalestrante($codPalestrante)
     {
         $palestrantes = app('db')->select('SELECT p.codpalestrante "codPalestrante", p.nome, p.cpf, p.telefone, p.email, p.biografia FROM palestrante p where p.codPalestrante =' . $codPalestrante . ';');
-        $palestrantes = json_decode(json_encode($palestrantes), true);
-        $areasPalestrante = app('db')->select('SELECT  p.codareapalestrante "codAreaPalestrante", p.codarea "codArea" FROM areapalestrante p
-            WHERE p.codpalestrante = ' . $codPalestrante . ";");
-        $palestrantes['areaPalestrante'] =  $areasPalestrante;
+        for ($a = 0; $a < count($palestrantes); $a++) {
+            $areasPalestrante = app('db')->select('SELECT  p.codareapalestrante "codAreaPalestrante", p.codarea "codArea" FROM areapalestrante p
+                WHERE p.codpalestrante = ' . $codPalestrante . ";");
+            $palestrantes['areaPalestrante'] =  $areasPalestrante;
+        }
 
         return $palestrantes;
     }
