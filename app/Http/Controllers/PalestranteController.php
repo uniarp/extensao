@@ -23,14 +23,12 @@ class PalestranteController extends BaseController
 
     public function listarPalestrante($codPalestrante)
     {
-        $palestrantes = app('db')->select('SELECT p.codpalestrante "codPalestrante", p.nome, p.cpf, p.telefone, p.email, p.biografia FROM palestrante p where p.codPalestrante ='.$codPalestrante.';');
+        $palestrantes = app('db')->select('SELECT p.codpalestrante "codPalestrante", p.nome, p.cpf, p.telefone, p.email, p.biografia FROM palestrante p where p.codPalestrante =' . $codPalestrante . ';');
         $palestrantes = json_decode(json_encode($palestrantes), true);
-        for ($i = 0; $i < count($palestrantes); $i++) {
-            $cod = $palestrantes[$i]['codPalestrante'];
-            $areasPalestrante = app('db')->select('SELECT  p.codareapalestrante "codAreaPalestrante", p.codarea "codArea" FROM areapalestrante p
+        $areasPalestrante = app('db')->select('SELECT  p.codareapalestrante "codAreaPalestrante", p.codarea "codArea" FROM areapalestrante p
             WHERE p.codpalestrante = ' . $cod . ";");
-            $palestrantes[$i]['areaPalestrante'] =  $areasPalestrante;
-        }
+        $palestrantes['areaPalestrante'] =  $areasPalestrante;
+
         return $palestrantes;
     }
 
@@ -43,7 +41,7 @@ class PalestranteController extends BaseController
             $codPalestrante = app('db')->select('SELECT MAX(p.codpalestrante) as codpalestrante FROM palestrante p;');
             $codPalestrante = json_decode(json_encode($codPalestrante), true);
             $codPalestrante = $codPalestrante[0]['codpalestrante'];
-            for($a = 0;  $a < count($area); $a++) {
+            for ($a = 0; $a < count($area); $a++) {
                 $codArea = $area[$a];
                 $queryArea = 'INSERT INTO areapalestrante("codarea", "codpalestrante") VALUES (';
                 $queryArea .= "'" . $codArea . "', '" . $codPalestrante . "');";
