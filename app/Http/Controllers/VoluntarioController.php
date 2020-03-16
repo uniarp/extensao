@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class VoluntarioController extends BaseController {
 
-    public function listarVoluntario() {
+    public function listarVoluntarios() {
         return app('db')->select('SELECT v.codvoluntario "codVoluntario", v.nome, v.email, v.cpf, v.telefone, v.ra, v.curso FROM voluntario v;');
     }
 
