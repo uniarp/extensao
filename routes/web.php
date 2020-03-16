@@ -4,53 +4,12 @@ use \Illuminate\Http\Request;
 use \App\Http\Controllers\ParticipanteController;
 use \App\Http\Controllers\UsuarioController;
 use \App\Http\Controllers\PalestranteController;
+use \App\Http\Controllers\VoluntarioController;
 use \Illuminate\Http\ResponseResponseResponseSymfony\Component\HttpFoundation\Response;
 
 $router->get('testeconte', function () use ($router) {
     return app('db')->select("select * from palestrante");
 });
-
-$router->get('/voluntarios/cadastrar/{nome}/{email}/{cpf}/{telefone}/{ra}/{curso}/{codVoluntario}', function ($nome, $email, $cpf, $telefone, $ra, $curso, $codvoluntario) {
-    $voluntario = (object) [
-        /*'codVoluntario' => 1*/
-    ];
-    return json_encode($voluntario);
-});
-
-$router->get('/voluntarios/alterar/{codvoluntario}/{nome}/{email}/{cpf}/{telefone}/{ra}/{curso}', function ($codvoluntario, $nome, $email, $cpf, $telefone, $ra, $curso) {
-    $voluntario = array(
-        'codVoluntario' => $codvoluntario,
-        'nome' => $nome,
-        'email' => $email,
-        'cpf' => $cpf,
-        'telefone' => $telefone,
-        'ra' => $ra,
-        'curso' => $curso
-    );
-    return json_encode($voluntario);
-});
-
-$router->get('/voluntarios/listar', function () {
-    $voluntarios = array(
-        array(
-            'codVoluntario' => 1, 'nome' => 'Teste', 'email' => 'uniarp1@uniarp.com', 'cpf' => 05335653025,
-            'telefone' => '4998349562', 'ra' => 025377, 'curso' => 'Sistemas'
-        ),
-        array(
-            'codVoluntario' => 2, 'nome' => 'Teste 2', 'email' => 'uniarp2@uniarp.com', 'cpf' => 01212312312,
-            'telefone' => '4998349562', 'ra' => 025317, 'curso' => 'Sistemas'
-        )
-    );
-    return json_encode($voluntarios);
-});
-
-$router->get('/voluntarios/excluir/{codVoluntario}', function ($codVoluntario) {
-    $status = (object) [
-        'status' => true
-    ];
-    return json_encode($status);
-});
-
 
 $router->get('/validador/validarDocumento/{token}', function ($token) {
     $tokenDados = (object) [
@@ -119,6 +78,32 @@ $router->get('/validar/{chave}', function ($chave) {
 
 /*AREA*/
 $router->get('/areas/listar', 'AreaController@listarArea');
+
+/* VOLUNTARIO */
+$router->get('/voluntarios/listar', 'VoluntarioController@listarVoluntarios');
+
+$router->post('/voluntarios/cadastrar', function () {
+    $body = dadosSessao();
+    $voluntario = new VoluntarioController();
+    try {
+        $voluntario->gravarVoluntario(
+            $body['codVoluntario'],
+            $body['nome'],
+            $body['email'],
+            $body['cpf'],
+            $body['telefone'],
+            $body['ra'],
+            $body['curso']
+        );
+    } catch (Exception $e) {
+        $response['erro'] = $e;
+        return response($response, 400);
+    }
+    return response('true', 200);
+});
+
+$router->delete('/voluntarios/excluir/{codVoluntario}', 'VoluntarioController@excluirVoluntario');
+
 
 /* PALESTRANTE */
 //Listar
