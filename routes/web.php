@@ -10,9 +10,9 @@ $router->get('testeconte', function () use ($router) {
     return app('db')->select("select * from palestrante");
 });
 
-$router->get('/voluntarios/cadastrar/{nome}/{email}/{cpf}/{telefone}/{ra}/{curso}', function ($nome, $email, $cpf, $telefone, $ra, $curso) {
+$router->get('/voluntarios/cadastrar/{nome}/{email}/{cpf}/{telefone}/{ra}/{curso}/{codVoluntario}', function ($nome, $email, $cpf, $telefone, $ra, $curso, $codvoluntario) {
     $voluntario = (object) [
-        'codVoluntario' => 1
+        /*'codVoluntario' => 1*/
     ];
     return json_encode($voluntario);
 });
