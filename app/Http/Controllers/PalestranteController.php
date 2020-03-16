@@ -28,7 +28,6 @@ class PalestranteController extends BaseController
         $areasPalestrante = app('db')->select('SELECT  p.codareapalestrante "codAreaPalestrante", p.codarea "codArea" FROM areapalestrante p
             WHERE p.codpalestrante = ' . $codPalestrante . ";");
         $palestrantes['area'] =  $areasPalestrante;
-
         return $palestrantes;
     }
 
