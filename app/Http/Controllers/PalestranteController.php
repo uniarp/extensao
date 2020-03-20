@@ -50,6 +50,8 @@ class PalestranteController extends BaseController
                 app('db')->select($queryArea);
             }
         } else {
+            $del = 'DELETE FROM areapalestrante  WHERE a.codpalestrante = '. $codPalestrante.';';
+            app('db')->select($del);
             for ($a = 0; $a < count($area); $a++) {
                 $codAreaPalestrante = $area[$a]['codAreaPalestrante'];
                 $codArea = $area[$a]['codArea'];
