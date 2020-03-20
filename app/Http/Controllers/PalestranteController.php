@@ -81,8 +81,7 @@ class PalestranteController extends BaseController
             app('db')->select($query);
             return true;
         }
-        $erro['erro']['mensagem'] = 'Não foi possível excçuir: Motivo Palestrante já possui vinculo a uma atividade';
-        $erro['erro']['status'] = 500;
+        $erro = 'Não foi possível excçuir: Motivo Palestrante já possui vinculo a uma atividade';
         return $erro;
     }
 }
