@@ -74,7 +74,7 @@ class PalestranteController extends BaseController
         $del = 'SELECT a.codatividadepalestrante FROM atividadepalestrante a WHERE a.codpalestrante ='. $codPalestrante.';';
         $palesAtividade = app('db')->select($del);
 
-        if ($palesAtividade) {
+        if (empty($palesAtividade)) {
             $queryArea = 'DELETE FROM areapalestrante  WHERE codpalestrante = '. $codPalestrante.';';
             app('db')->select($queryArea);
             $query = 'DELETE FROM palestrante WHERE codpalestrante = ' . $codPalestrante . ';';
@@ -82,6 +82,7 @@ class PalestranteController extends BaseController
             return true;
         }
         $erro['erro']['mensagem'] = 'Não foi possível excçuir: Motivo Palestrante já possui vinculo a uma atividade';
+        $erro['erro']['status'] = 500;
         return $erro;
     }
 }
