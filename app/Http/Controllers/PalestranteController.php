@@ -81,6 +81,5 @@ class PalestranteController extends BaseController
             app('db')->select($query);
             return true;
         }
-        return 'Não foi possível excluir: Moivo já possui vinculo no sistema'
-    }
+        return 'Não foi possível excluir: Moivo já possui vinculo no sistema';
 }
