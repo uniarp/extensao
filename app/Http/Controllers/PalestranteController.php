@@ -81,7 +81,7 @@ class PalestranteController extends BaseController
             app('db')->select($query);
             return 'true';
         }
-        $erro = 'Não foi possível excçuir: Motivo Palestrante já possui vinculo a uma atividade';
+        $erro = 'Não foi possível excluir: Motivo Palestrante já possui vinculo a uma atividade';
         return $erro;
     }
 }
