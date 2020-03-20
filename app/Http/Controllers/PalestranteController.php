@@ -80,9 +80,7 @@ class PalestranteController extends BaseController
             $query = 'DELETE FROM palestrante WHERE codpalestrante = ' . $codPalestrante . ';';
             app('db')->select($query);
             return true;
-        }else {
-            return false;
         }
-
+        return 'Não foi possível excluir: Moivo já possui vinculo no sistema'
     }
 }
