@@ -52,13 +52,12 @@ class PalestranteController extends BaseController
         } else {
             for ($a = 0; $a < count($area); $a++) {
                 $codAreaPalestrante = $area[$a]['codAreaPalestrante'];
-                return $codAreaPalestrante;
                 $codArea = $area[$a]['codArea'];
                 if ($codAreaPalestrante  === null) {
                     $queryArea = 'INSERT INTO areapalestrante("codarea", "codpalestrante") VALUES (';
                     $queryArea .= "'" . $codArea . "', '" . $codPalestrante . "');";
-                    return $queryArea;
                     app('db')->select($queryArea);
+                    return $queryArea;
                 }
 
             }
