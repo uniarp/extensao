@@ -79,9 +79,9 @@ class PalestranteController extends BaseController
             app('db')->select($queryArea);
             $query = 'DELETE FROM palestrante WHERE codpalestrante = ' . $codPalestrante . ';';
             app('db')->select($query);
-            return true;
+            return 'true';
         }
         $erro = 'Não foi possível excçuir: Motivo Palestrante já possui vinculo a uma atividade';
-        return false;
+        return $erro;
     }
 }
