@@ -130,7 +130,9 @@ $router->post('/palestrantes/cadastrar', function () {
         $response['erro'] = $e;
         return response($response, 400);
     }
-    return response($res['erro']['mensagem'], $res['erro']['status']);
+    $mensagem = ['erro']['mensagem'];
+    $status = ['erro']['status'];
+    return response($mensagem, $status);
 });
 
 //excluir
