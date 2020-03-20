@@ -82,6 +82,6 @@ class PalestranteController extends BaseController
             return true;
         }
         $erro = 'Não foi possível excçuir: Motivo Palestrante já possui vinculo a uma atividade';
-        return $erro;
+        return false;
     }
 }
