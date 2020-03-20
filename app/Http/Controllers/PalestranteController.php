@@ -57,7 +57,7 @@ class PalestranteController extends BaseController
                 if ($codAreaPalestrante  === null) {
                     $queryArea = 'INSERT INTO areapalestrante("codarea", "codpalestrante") VALUES (';
                     $queryArea .= "'" . $codArea . "', '" . $codPalestrante . "');";
-                    return $query;
+                    return $queryArea;
                     app('db')->select($queryArea);
                 }
 
