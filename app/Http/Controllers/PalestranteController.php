@@ -50,8 +50,8 @@ class PalestranteController extends BaseController
                 app('db')->select($queryArea);
             }
         } else {
-
             for ($a = 0; $a < count($area); $a++) {
+                return $area;
                 $codAreaPalestrante = $area[$a]['codAreaPalestante'];
                 $codArea = $area[$a]['codArea'];
                 if ($codAreaPalestrante  === null) {
