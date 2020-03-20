@@ -51,8 +51,7 @@ class PalestranteController extends BaseController
             }
         } else {
             for ($a = 0; $a < count($area); $a++) {
-                return $area;
-                $codAreaPalestrante = $area[$a]['codAreaPalestante'];
+                $codAreaPalestrante = $area[$a]['codAreaPalestrante'];
                 $codArea = $area[$a]['codArea'];
                 if ($codAreaPalestrante  === null) {
                     $queryArea = 'INSERT INTO areapalestrante("codarea", "codpalestrante") VALUES (';
