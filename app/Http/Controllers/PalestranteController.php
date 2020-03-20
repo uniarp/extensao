@@ -71,7 +71,18 @@ class PalestranteController extends BaseController
 
     public function excluirPalestrante($codPalestrante)
     {
-        $query = "DELETE FROM palestrante WHERE codpalestrante = '" . $codPalestrante . "'";
-        return app('db')->select($query);
+        $del = 'SELECT a.codatividadepalestrante FROM atividadepalestrante a WHERE a.codpalestrante ='. $codPalestrante.';';
+        $palesAtividade = app('db')->select($del);
+
+        if ($palesAtividade) {
+            $queryArea = 'DELETE FROM areapalestrante  WHERE codpalestrante = '. $codPalestrante.';';
+            app('db')->select($queryArea);
+            $query = 'DELETE FROM palestrante WHERE codpalestrante = ' . $codPalestrante . ';';
+            app('db')->select($query);
+            return true;
+        }else {
+            return false;
+        }
+
     }
 }
