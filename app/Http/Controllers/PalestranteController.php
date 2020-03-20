@@ -50,32 +50,29 @@ class PalestranteController extends BaseController
                 app('db')->select($queryArea);
             }
         } else {
-            $del = 'DELETE FROM areapalestrante  WHERE codpalestrante = '. $codPalestrante.';';
+            $del = 'DELETE FROM areapalestrante  WHERE codpalestrante = ' . $codPalestrante . ';';
             app('db')->select($del);
             for ($a = 0; $a < count($area); $a++) {
-                $codAreaPalestrante = $area[$a]['codAreaPalestrante'];
                 $codArea = $area[$a]['codArea'];
-                if ($codAreaPalestrante  === null) {
-                    $queryArea = 'INSERT INTO areapalestrante("codarea", "codpalestrante") VALUES (';
-                    $queryArea .= "'" . $codArea . "', '" . $codPalestrante . "');";
-                    app('db')->select($queryArea);
-                }
 
+                $queryArea = 'INSERT INTO areapalestrante("codarea", "codpalestrante") VALUES (';
+                $queryArea .= "'" . $codArea . "', '" . $codPalestrante . "');";
+                app('db')->select($queryArea);
             }
 
             $query = "UPDATE palestrante SET nome = '" . $nome . "', cpf = '" . $cpf . "', telefone = '" . $telefone . "', email = '"
-             . $email . "', biografia = '" . $biografia . "' WHERE codpalestrante =" . $codPalestrante . ";";
+                . $email . "', biografia = '" . $biografia . "' WHERE codpalestrante =" . $codPalestrante . ";";
             return app('db')->select($query);
         }
     }
 
     public function excluirPalestrante($codPalestrante)
     {
-        $del = 'SELECT a.codatividadepalestrante FROM atividadepalestrante a WHERE a.codpalestrante ='. $codPalestrante.';';
+        $del = 'SELECT a.codatividadepalestrante FROM atividadepalestrante a WHERE a.codpalestrante =' . $codPalestrante . ';';
         $palesAtividade = app('db')->select($del);
 
         if (empty($palesAtividade)) {
-            $queryArea = 'DELETE FROM areapalestrante  WHERE codpalestrante = '. $codPalestrante.';';
+            $queryArea = 'DELETE FROM areapalestrante  WHERE codpalestrante = ' . $codPalestrante . ';';
             app('db')->select($queryArea);
             $query = 'DELETE FROM palestrante WHERE codpalestrante = ' . $codPalestrante . ';';
             app('db')->select($query);
