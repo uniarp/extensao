@@ -50,6 +50,19 @@ class PalestranteController extends BaseController
                 app('db')->select($queryArea);
             }
         } else {
+
+            for ($a = 0; $a < count($area); $a++) {
+                $codAreaPalestrante = $area[$a]['codAreaPalestante'];
+                $codArea = $area[$a]['codArea'];
+                if ($codAreaPalestrante  === null) {
+                    $queryArea = 'INSERT INTO areapalestrante("codarea", "codpalestrante") VALUES (';
+                    $queryArea .= "'" . $codArea . "', '" . $codPalestrante . "');";
+                    return $queryArea;
+                    app('db')->select($queryArea);
+                }
+
+            }
+
             $query = "UPDATE palestrante SET nome = '" . $nome . "', cpf = '" . $cpf . "', telefone = '" . $telefone . "', email = '"
              . $email . "', biografia = '" . $biografia . "' WHERE codpalestrante =" . $codPalestrante . ";";
             return app('db')->select($query);
