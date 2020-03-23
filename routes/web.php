@@ -82,6 +82,8 @@ $router->get('/areas/listar', 'AreaController@listarArea');
 /* VOLUNTARIO */
 $router->get('/voluntarios/listar', 'VoluntarioController@listarVoluntarios');
 
+$router->get('/voluntarios/listar/{codVoluntario}', 'VoluntarioController@listarVoluntario');
+
 $router->post('/voluntarios/cadastrar', function () {
     $body = dadosSessao();
     $voluntario = new VoluntarioController();
@@ -139,7 +141,9 @@ $router->delete('/palestrantes/excluir/{codPalestrante}', 'PalestranteController
 
 /* PARTICIPANTE */
 //Listar
-$router->get('/participantes/listar/', 'ParticipanteController@listarParticipante');
+$router->get('/participantes/listar/', 'ParticipanteController@listarParticipantes');
+
+$router->get('/participantes/listar/{codParticipante}', 'ParticipanteController@listarParticipante');
 
 //Cadastrar
 $router->post('/participantes/cadastrar', function () {
