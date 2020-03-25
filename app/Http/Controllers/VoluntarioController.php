@@ -21,7 +21,7 @@ class VoluntarioController extends BaseController {
             $query = "INSERT INTO voluntario (nome, email, cpf, telefone, ra, curso) values(";
             $query .= "'$nome', '$email', '$cpf', '$telefone', '$ra', '$curso');";
         } else {
-            $query = "UPDATE voluntario SET nome = '$nome', email = '$email', cpf = '$cpf', telefone = '$telefone', ra = '$ra', curso = $curso WHERE codvoluntario = $codVoluntario;";
+            $query = "UPDATE voluntario SET nome = '$nome', email = '$email', cpf = '$cpf', telefone = '$telefone', ra = '$ra', curso = '$curso' WHERE codvoluntario = $codVoluntario;";
         }
         return app('db')->select($query);
     }
