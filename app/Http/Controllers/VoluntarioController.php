@@ -13,7 +13,7 @@ class VoluntarioController extends BaseController {
     }
 
     public function listarVoluntario($codVoluntario) {
-        return app('db')->select('SELECT v.codvoluntario "codVoluntario", v.nome, v.email, v.cpf, v.telefone, v.ra, v.curso FROM voluntario v WHERE v.codvoluntario = $codVoluntario;');
+        return app('db')->select('SELECT v.codvoluntario "codVoluntario", v.nome, v.email, v.cpf, v.telefone, v.ra, v.curso FROM voluntario v WHERE v.codvoluntario = ' . $codVoluntario . ';');
     }
 
     public function gravarVoluntario($codVoluntario, $nome, $email, $cpf, $telefone, $ra, $curso) {
