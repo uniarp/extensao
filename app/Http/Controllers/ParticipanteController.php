@@ -12,7 +12,7 @@ class ParticipanteController extends BaseController {
     }
 
     public function listarParticipante($codParticipante) {
-        return app('db')->select("SELECT p.codparticipante cod, p.nome, p.cpf, p.ra, p.telefone, p.email FROM participante p WHERE p.codparticipante = $codParticipante;");
+        return app('db')->select('SELECT p.codparticipante "codParticipante", p.nome, p.cpf, p.ra, p.telefone, p.email FROM participante p WHERE p.codparticipante = ' . $codParticipante . ';');
     }
 
     public function gravarParticipante($codParticipante, $nome, $cpf, $ra, $senha, $telefone, $email) {
