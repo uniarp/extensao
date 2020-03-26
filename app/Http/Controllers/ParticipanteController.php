@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class ParticipanteController extends BaseController {
     
     public function listarParticipantes() {
-        return app('db')->select("SELECT p.codparticipante cod, p.nome, p.cpf, p.ra, p.telefone, p.email FROM participante p;");
+        return app('db')->select('SELECT p.codparticipante "codParticipante", p.nome, p.cpf, p.ra, p.telefone, p.email FROM participante p;');
     }
 
     public function listarParticipante($codParticipante) {
