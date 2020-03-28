@@ -35,7 +35,6 @@ class AtividadeController extends BaseController
             $codAtividade = $codAtividade[0]['codAtividade'];
             for ($a = 0; $a < count($palestrante); $a++) {
                 $codPalestrante = $palestrante[$a]['codPalestrante'];
-                return $codPalestrante;
                 $queryPalestrante = 'INSERT INTO atividadepalestrante ("codpalestrante", "codatividade") VALUES (';
                 $queryPalestrante .= "'" . $codPalestrante . "', '" . $codAtividade . "');";
                 app('db')->select($queryPalestrante);
