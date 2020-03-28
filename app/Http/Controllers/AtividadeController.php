@@ -39,7 +39,7 @@ class AtividadeController extends BaseController
                 $queryPalestrante .= "'" . $codPalestrante . "', '" . $codAtividade . "');";
                 app('db')->select($queryPalestrante);
             }
-            $retorno = listarAtividade($codAtividade);
+            $retorno =  AtividadeController::listarAtividade($codAtividade);
             return $retorno;
         } else {
             $del = 'DELETE FROM atividadepalestrante  WHERE codatividade = ' . $codAtividade . ';';
@@ -54,7 +54,7 @@ class AtividadeController extends BaseController
             $query = "UPDATE atividade SET titulo = '" . $titulo . "', codtipo = '" . $codTipo . "', datainicio = '" . $dataInicio . "', datafim = '"
             . $dataFim . "', localizacao = '" . $localizacao . "', descricao = '" . $descricao ."' WHERE codatividade =" . $codAtividade . ";";
             app('db')->select($query);
-            $retorno = listarAtividade($codAtividade);
+            $retorno = AtividadeController::listarAtividade($codAtividade);
             return $retorno;
         }
     }
