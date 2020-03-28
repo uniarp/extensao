@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class TipoAtividadeController extends BaseController {
 
     public function listarTipoAtividade() {
-        return app('db')->select('SELECT t.codtipoatividade "codTipoAtividade", a.nome FROM tipoatividade t;');
+        return app('db')->select('SELECT t.codtipoatividade "codTipoAtividade", t.nome FROM tipoatividade t;');
     }
 
 }
