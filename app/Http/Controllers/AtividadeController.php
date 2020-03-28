@@ -31,10 +31,11 @@ class AtividadeController extends BaseController
             $query .= "'" . $titulo . "', ". $codTipo .", '" . $dataInicio . "', '" . $dataFim . "', '" . $localizacao . "', '" . $descricao . "');";
             app('db')->select($query);
             $codAtividade = app('db')->select('SELECT MAX(atv.codatividade) "codAtividade" FROM atividade atv;');
+            return $codAtividade;
             $codAtividade = json_decode(json_encode($codAtividade), true);
             $codAtividade = $codAtividade[0]['codAtividade'];
             for ($a = 0; $a < count($palestrante); $a++) {
-                $codPalestrante = $palestrante[$a]['CodPalestrante'];
+                $codPalestrante = $palestrante[$a]['codPalestrante'];
                 $queryPalestrante = 'INSERT INTO atividadepalestrante ("codpalestrante", "codatividade") VALUES (';
                 $queryPalestrante .= "'" . $codPalestrante . "', '" . $codAtividade . "');";
                 app('db')->select($queryPalestrante);
