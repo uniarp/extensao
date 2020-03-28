@@ -24,7 +24,7 @@ class AtividadeController extends BaseController
         return $atividade;
     }
 
-    public function gravarPalestrante($codAtividade, $titulo, $codTipo, $dataInicio, $dataFim, $localizacao, $descricao, $palestrante)
+    public function gravarAtividade($codAtividade, $titulo, $codTipo, $dataInicio, $dataFim, $localizacao, $descricao, $palestrante)
     {
         if ($codAtividade === null) {
             $query = 'INSERT INTO atividade ("titulo", "codtipo", "datainicio", "datafim", "localizacao", "descricao") VALUES (';

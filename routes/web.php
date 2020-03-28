@@ -5,6 +5,7 @@ use \App\Http\Controllers\ParticipanteController;
 use \App\Http\Controllers\UsuarioController;
 use \App\Http\Controllers\PalestranteController;
 use \App\Http\Controllers\VoluntarioController;
+use \App\Http\Controllers\AtividadeController;
 use \Illuminate\Http\ResponseResponseResponseSymfony\Component\HttpFoundation\Response;
 
 $router->get('testeconte', function () use ($router) {
@@ -203,7 +204,36 @@ $router->delete('/usuarios/excluir/{codUsuario}', 'UsuarioController@excluirUsua
 $router->get('/tipoAtividades/listar', 'TipoAtividadeController@listarTipoAtividade');
 
 //Atividade
+$router->get('/atividades/listar/{codAtividade}', 'AtividadeController@listarAtividade');
 
+//cadastar
+$router->post('/atividades/cadastrar', function () {
+    $body = dadosSessao();
+    $atividade = new AtividadeController();
+
+    try {
+       $res = $atividade->gravarAtividade(
+            $body['codAtividade'],
+            $body['titulo'],
+            $body['codTipo'],
+            $body['dataInicio'],
+            $body['dataFim'],
+            $body['localizacao'],
+            $body['descricao'],
+            $body['palestrante']
+        );
+    } catch (Exception $e) {
+        $response['erro'] = $e;
+        return response($response, 400);
+    }
+    return response($res, 200);
+});
+
+//Excluir
+$router->delete('/atividade/excluir/{codAtividade}', 'AtividadeController@excluirAtividade');
+
+
+//Evento
 $router->get('/eventos/listarEvento/{codEvento}/', function ($codEvento) {
     $evento = (object) [
         'codEvento' => $codEvento,
