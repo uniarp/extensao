@@ -199,6 +199,10 @@ $router->post('/usuarios/cadastrar', function () {
 //Excluir
 $router->delete('/usuarios/excluir/{codUsuario}', 'UsuarioController@excluirUsuario');
 
+//TipoAtividade
+$router->get('/tipoAtividades/listar', 'TipoAtividadeController@listarTipoAtividade');
+
+//Atividade
 
 $router->get('/eventos/listarEvento/{codEvento}/', function ($codEvento) {
     $evento = (object) [
