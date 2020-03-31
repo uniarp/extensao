@@ -6,6 +6,7 @@ use \App\Http\Controllers\UsuarioController;
 use \App\Http\Controllers\PalestranteController;
 use \App\Http\Controllers\VoluntarioController;
 use \App\Http\Controllers\AtividadeController;
+use \App\Http\Controllers\EventoController;
 use \Illuminate\Http\ResponseResponseResponseSymfony\Component\HttpFoundation\Response;
 
 $router->get('testeconte', function () use ($router) {
@@ -42,26 +43,6 @@ $router->get('/documentos/gerar/{codigoInscricao}', function ($codigoInscricao) 
 });
 
 /* OPA OPA MEU CONSAGRADO */
-
-$router->get('/eventos/listar/{filtro}/{valor}', function ($filro, $valor) {
-    return 'status:true';
-});
-
-$router->get('/eventos/visulizar/{codigoEvento}', function ($codigoEvento) {
-    $evento = (object) [
-        'codigoEvento' => $codigoEvento,
-        'titulo' => "Teste",
-        'periodoInicial' => '2019-10-10',
-        'periodoFinal' => '2019-10-15',
-        'inscricaoInicio' => '2019-09-20',
-        'inscricaoFim' => '2019-10-05',
-        'qtoMinInscritos' => 5,
-        'status' => "Aberto",
-        'qtdMaxInscrito' => 20,
-        'modelDoc' => 'Https://modeloSead.png'
-    ];
-    return json_encode($evento);
-});
 
 $router->get('/participante/inscricao/{codigoParticipante}/{codigoAtividade}', function ($codigoParticipante, $codigoAtividade) {
     $participante = (object) [
@@ -152,7 +133,7 @@ $router->post('/participantes/cadastrar', function () {
     $participante = new ParticipanteController();
 
     try {
-       $response = $participante->gravarParticipante(
+        $response = $participante->gravarParticipante(
             $body['codParticipante'],
             $body['nome'],
             $body['cpf'],
@@ -212,7 +193,7 @@ $router->post('/atividades/cadastrar', function () {
     $atividade = new AtividadeController();
 
     try {
-       $res = $atividade->gravarAtividade(
+        $res = $atividade->gravarAtividade(
             $body['codAtividade'],
             $body['titulo'],
             $body['codTipo'],
@@ -234,157 +215,39 @@ $router->delete('/atividade/excluir/{codAtividade}', 'AtividadeController@exclui
 
 
 //Evento
-$router->get('/eventos/listarEvento/{codEvento}/', function ($codEvento) {
-    $evento = (object) [
-        'codEvento' => $codEvento,
-        'titulo' => 'Teste 2',
-        'periodoInicial' => '2020-10-10',
-        'periodoFinal' => '2020-10-15',
-        'inscricaoInicio' => '2020-09-20',
-        'inscricaoFim' => '2020-10-05',
-        'qtdMinInscritos' => 5,
-        'status' => 'Aberto',
-        'qtdMaxInscritos' => 20,
-        'modeloDoc' => 'https;//modeloSead.png',
-        'area' => ['Engenharia', 'Direiro'],
-        'equipe' => ['Mauricio', 'Delmison', 'Gabriel'],
-        'atividades' => ['Abertura', 'Palestra', 'Fechamento']
 
-    ];
+//Cadastrar
+$router->post('/eventos/cadastrar', function () {
+    $body = dadosSessao();
+    $evento = new EventoController();
 
-
-
-    return json_encode($evento);
+    try {
+        $evento->gravarEvento(
+            $body['codEvento'],
+            $body['titulo'],
+            $body['periodoInicial'],
+            $body['periodoFinal'],
+            $body['inscricaoInicio'],
+            $body['inscricaoFim'],
+            $body['qtdMinInscrito'],
+            $body['qtdMaxInscrito'],
+            $body['modeloDoc']
+        );
+    } catch (Exception $e) {
+        $response['erro'] = $e;
+        return response($response, 400);
+    }
+    return response('true', 200);
 });
 
-$router->get('/eventos/listarInscritos/{filtros}/', function ($filtros) {
-    $inscritos = array(
-        array(
-            'codInscrito' => 1,
-            'Nome' => 'Gabriel Soares',
-            'email' => 'uniarp1@uniarp.com',
-            'cpf' => '05335653025',
-            'telefone' => '4998349562',
-            'senha' => 'senha123',
-            'ra' => '025960'
-        ),
-        array(
-            'codInscrito' => 123,
-            'nome' => 'Daniel Conte',
-            'email' => 'uniarp1@uniarp.com',
-            'cpf' => '053111122',
-            'telefone' => '4998349562',
-            'senha' => 'senha321',
-            'ra' => null
-        )
-    );
+//Listar Eventos
+$router->get('/eventos/listar', 'EventoController@listarEventos');
 
-    return json_encode($inscritos);
-});
+//Listar Evento por Cod
+$router->get('/eventos/listar/{codEvento}', 'EventoController@listarEvento');
 
-$router->get('/eventos/detalhesInscrito/{codInscrito}/', function ($codInscrito) {
-    $inscrito = (object) [
-        'codInscrito' => $codInscrito,
-        'Nome' => 'Gabriel Soares',
-        'email' => 'uniarp1@uniarp.com',
-        'cpf' => '05335653025',
-        'telefone' => '4998349562',
-        'senha' => 'senha123',
-        'ra' => '025960'
-    ];
-
-    return json_encode($inscrito);
-});
-
-$router->get('/eventos/cadastrar/{titulo}/{periodoInicial}/{periodoFinal}/{dtIncricaoInicio}/{dtIncricaoFim}/{qtdMinInscritos}/{qtdMaxInscritos}/{modeloDoc}/{area}/{equipe}/{atividades}', function ($titulo, $periodoInicial, $periodoFinal, $dtIncricaoInicio, $dtIncricaoFim, $qtdMinInscritos, $qtdMaxInscritos, $modeloDoc, $area, $equipe, $atividades) {
-    $evento = (object) [
-        'codEvento' => 1,
-        'titulo' => 'Teste 1',
-        'periodoInicial' => '2020-10-10',
-        'periodoFinal' => '2020-10-15',
-        'inscricaoInicio' => '2020-09-20',
-        'inscricaoFim' => '2020-10-05',
-        'qtdMinInscritos' => 5,
-        'status' => 'Aberto',
-        'qtdMaxInscritos' => 20,
-        'modeloDoc' => 'https;//modeloTeste1.png',
-        'area' => ['Engenharia', 'Direiro'],
-        'equipe' => ['Mauricio', 'Delmison', 'Gabriel'],
-        'atividades' => ['Abertura', 'Palestra', 'Fechamento']
-
-    ];
-
-
-
-    return json_encode($evento);
-});
-
-$router->get('/eventos/alterar/{codigoEvento}/{mudancas}/', function ($codigoEvento, $mudancas) {
-    $evento = (object) [
-        'codEvento' => $codigoEvento,
-        'titulo' => 'Teste 2',
-        'periodoInicial' => '2020-10-10',
-        'periodoFinal' => '2020-10-15',
-        'inscricaoInicio' => '2020-09-20',
-        'inscricaoFim' => '2020-10-05',
-        'qtdMinInscritos' => 5,
-        'status' => 'Aberto',
-        'qtdMaxInscritos' => 20,
-        'modeloDoc' => 'https://modeloTeste2.png',
-        'area' => ['Engenharia', 'Direiro'],
-        'equipe' => ['Mauricio', 'Delmison', 'Gabriel'],
-        'atividades' => ['Abertura', 'Palestra', 'Fechamento']
-    ];
-
-    return json_encode($evento);
-});
-
-$router->get('/eventos/excluir/{codigoEvento}', function ($codigoEvento) {
-    $evento = (object) [
-        'status' => true
-    ];
-
-    return json_encode($evento);
-});
-
-$router->get('/eventos/cancelar/{codigoEvento}', function ($codigoEvento) {
-    $evento = (object) [
-        'codigoEvento' => $codigoEvento,
-        'status' => 'true'
-    ];
-
-    return json_encode($evento);
-});
-
-$router->get('/eventos/listar/{filtros}', function ($filtros) {
-    $evento = array(
-        array(
-            'codEvento' => 1,
-            'titulo' => 'Teste',
-            'periodoInicial' => '2019-10-10',
-            'periodoFinal' => '2019-10-15',
-            'inscricaoInicio' => '2019-09-20',
-            'inscricaoFim' => '2019-10-05',
-            'qtdMinInscrito' => 5,
-            'status' => 'Aberto',
-            'qtdMaxInscrito' => 20,
-            'modelDoc' => 'ambos'
-        ),
-        array(
-            'codEvento' => 2,
-            'titulo' => 'Teste 2',
-            'periodoInicial' => '2019-10-10',
-            'periodoFinal' => '2019-10-15',
-            'inscricaoInicio' => '2019-09-20',
-            'inscricaoFim' => '2019-10-05',
-            'qtdMinInscrito' => 5,
-            'status' => 'Aberto',
-            'qtdMaxInscrito' => 20,
-            'modelDoc' => 'ambos'
-        )
-    );
-    return json_encode($evento);
-});
+//Excluir
+$router->delete('/eventos/excluir/{codEvento}', 'EventoController@excluirEvento');
 
 function dadosSessao()
 {
