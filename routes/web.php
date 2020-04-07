@@ -225,7 +225,7 @@ $router->post('/eventos/cadastrar', function () {
         $evento->gravarEvento(
             $body['codEvento'],
             $body['titulo'],
-            $body['codEvento'],
+            $body['codArea'],
             $body['periodoInicial'],
             $body['periodoFinal'],
             $body['inscricaoInicio'],
