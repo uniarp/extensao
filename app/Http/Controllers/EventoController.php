@@ -36,7 +36,6 @@ class EventoController extends BaseController
             $query = 'INSERT INTO evento ("titulo", "periodoinicial", "periodofinal", "inscricaoinicio", "inscricaofim", "qtdmininscrito", "qtdmaxinscrito", "modeldol") VALUES (';
             $query .= "'" . $titulo . "', '" . $periodoInicial . "', '" . $periodoFinal . "', '" . $inscricaoInicio . "', '" . $inscricaoFim . "', '" . $qtdMinInscrito . "', '" . $qtdMaxInscrito . "', '" . $modeloDoc . "');";
             app('db')->select($query);
-            return $query;
             $codEvento = app('db')->select('SELECT MAX(e.codevento) as "codEvento" FROM evento e;');
             $codEvento = json_decode(json_encode($codEvento), true);
             $codEvento = $codEvento[0]['codEvento'];
@@ -56,7 +55,7 @@ class EventoController extends BaseController
                     app('db')->select($updateAtividade);
                 }
             }
-            // return EventoController::listarEvento($codEvento);
+            return EventoController::listarEvento($codEvento);
         } else {
             $updateAreaEvento = 'UPDATE areaevento set codArea =' . $codArea['codArea'] . ' WHERE codEvento = ' . $codEvento . ';';
             app('db')->select($updateAreaEvento);
