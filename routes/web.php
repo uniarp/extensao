@@ -219,10 +219,10 @@ $router->delete('/atividades/excluir/{codAtividade}', 'AtividadeController@exclu
 //Cadastrar
 $router->post('/eventos/cadastrar', function () {
     $body = dadosSessao();
-    $res = $evento = new EventoController();
+    $evento = new EventoController();
 
     try {
-        $evento->gravarEvento(
+        $res = $evento->gravarEvento(
             $body['codEvento'],
             $body['titulo'],
             $body['codArea'],
