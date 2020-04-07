@@ -35,6 +35,7 @@ class EventoController extends BaseController
         if ($codEvento === null) {
             $query = 'INSERT INTO evento ("titulo", "periodoinicial", "periodofinal", "inscricaoinicio", "inscricaofim", "qtdmininscrito", "qtdmaxinscrito", "modeldol") VALUES (';
             $query .= "'".$titulo."', '".$periodoInicial."', '".$periodoFinal."', '".$inscricaoInicio."', '".$inscricaoFim."', '".$qtdMinInscrito."', '".$qtdMaxInscrito."', '".$modeloDoc."');";
+            return $query;
             app('db')->select($query);
             $codEvento = app('db')->select('SELECT MAX(e.codevento) as "codEvento" FROM evento e;');
             $codEvento = json_decode(json_encode($codEvento), true);
