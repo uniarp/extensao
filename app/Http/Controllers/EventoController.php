@@ -34,7 +34,7 @@ class EventoController extends BaseController
     {
         if ($codEvento === null) {
             $query = 'INSERT INTO evento ("titulo", "periodoinicial", "periodofinal", "inscricaoinicio", "inscricaofim", "qtdmininscrito", "qtdmaxinscrito", "modeldol") VALUES (';
-            $query .= "'$titulo', '$periodoInicial', '$periodoFinal', '$inscricaoInicio', '$inscricaoFim', '$qtdMinInscrito', '$qtdMaxInscrito', '$modeloDoc');";
+            $query .= "'".$titulo."', '".$periodoInicial."', '".$periodoFinal."', '".$inscricaoInicio."', '".$inscricaoFim."', '".$qtdMinInscrito."', '".$qtdMaxInscrito."', '".$modeloDoc."');";
             app('db')->select($query);
             $codEvento = app('db')->select('SELECT MAX(e.codevento) as "codEvento" FROM evento e;');
             $codEvento = json_decode(json_encode($codEvento), true);
@@ -66,7 +66,9 @@ class EventoController extends BaseController
                 $insetVolun = 'INSERT INTO equipeevento ("codvoluntario", "codevento") VALUES (' . $codVoluntario . ', ' . $codEvento . ');';
                 app('db')->select($insetVolun);
             }
-            $query = "UPDATE evento SET titulo = '$titulo', periodoinicial = '$periodoInicial', periodofinal = '$periodoFinal', inscricaoinicio = '$inscricaoInicio', inscricaofim = '$inscricaoFim', qtdmininscrito = '$qtdMinInscrito', qtdmaxinscrito = '$qtdMaxInscrito', modeldol = '$modeloDoc' WHERE codevento = '$codEvento';";
+            $query = "UPDATE evento SET titulo = '".$titulo."', periodoinicial = '".$periodoInicial."', periodofinal = '".$periodoFinal."', inscricaoinicio = '"
+            .$inscricaoInicio."', inscricaofim = '".$inscricaoFim."', qtdmininscrito = '".$qtdMinInscrito."', qtdmaxinscrito = '".$qtdMaxInscrito
+            ."', modeldol = '".$modeloDoc."' WHERE codevento = '".$codEvento."';";
             return EventoController::listarEvento($codEvento);
         }
     }
