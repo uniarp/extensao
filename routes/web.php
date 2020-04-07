@@ -211,7 +211,7 @@ $router->post('/atividades/cadastrar', function () {
 });
 
 //Excluir
-$router->delete('/atividade/excluir/{codAtividade}', 'AtividadeController@excluirAtividade');
+$router->delete('/atividades/excluir/{codAtividade}', 'AtividadeController@excluirAtividade');
 
 
 //Evento
