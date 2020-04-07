@@ -40,7 +40,7 @@ class EventoController extends BaseController
             $codEvento = app('db')->select('SELECT MAX(e.codevento) as "codEvento" FROM evento e;');
             $codEvento = json_decode(json_encode($codEvento), true);
             $codEvento = $codEvento[0]['codEvento'];
-            $insertAreaEvento = 'INSERT INTO areaevento ("codarea", "codevento") VALUES (' . $codArea['codArea'] . ', ' . $codEvento . ');';
+            $insertAreaEvento = 'INSERT INTO areaevento ("codarea", "codevento") VALUES (' . $codArea[0]['codArea'] . ', ' . $codEvento . ');';
             app('db')->select($insertAreaEvento);
             if (!empty($voluntario)) {
                 for ($v = 0; $v < count($voluntario); $v++) {
