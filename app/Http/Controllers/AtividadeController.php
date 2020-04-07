@@ -58,4 +58,20 @@ class AtividadeController extends BaseController
             return $retorno;
         }
     }
+
+    public function excluirAtividade($codAtividade)
+    {
+        $select = 'SELECT p.codparticipanteatividade FROM participanteatividade p WHERE a.codAtividade =' . $codAtividade . ';';
+        $participanteAtividade = app('db')->select($select);
+
+        if (empty($participanteAtividade)) {
+            $queryArea = 'DELETE FROM atividadepalestrante  WHERE codatividade = ' . $codAtividade . ';';
+            app('db')->select($queryArea);
+            $query = 'DELETE FROM atividade WHERE codAtividade = ' . $codAtividade . ';';
+            app('db')->select($query);
+            return 'true';
+        }
+        $erro = 'Não foi possível excluir Motivo: Atividade já possui inscritos';
+        return $erro;
+    }
 }

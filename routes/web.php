@@ -225,13 +225,16 @@ $router->post('/eventos/cadastrar', function () {
         $evento->gravarEvento(
             $body['codEvento'],
             $body['titulo'],
+            $body['codEvento'],
             $body['periodoInicial'],
             $body['periodoFinal'],
             $body['inscricaoInicio'],
             $body['inscricaoFim'],
             $body['qtdMinInscrito'],
             $body['qtdMaxInscrito'],
-            $body['modeloDoc']
+            $body['modeloDoc'],
+            $body['voluntario'],
+            $body['atividades']
         );
     } catch (Exception $e) {
         $response['erro'] = $e;
