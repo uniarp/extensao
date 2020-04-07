@@ -61,7 +61,7 @@ class AtividadeController extends BaseController
 
     public function excluirAtividade($codAtividade)
     {
-        $select = 'SELECT p.codparticipanteatividade FROM participanteatividade p WHERE a.codAtividade =' . $codAtividade . ';';
+        $select = 'SELECT p.codparticipanteatividade FROM participanteatividade p WHERE p.codAtividade =' . $codAtividade . ';';
         $participanteAtividade = app('db')->select($select);
 
         if (empty($participanteAtividade)) {
