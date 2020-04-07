@@ -33,15 +33,14 @@ class EventoController extends BaseController
     public function gravarEvento($codEvento, $titulo, $codArea, $periodoInicial, $periodoFinal, $inscricaoInicio, $inscricaoFim, $qtdMinInscrito, $qtdMaxInscrito, $modeloDoc, $voluntario, $atividades)
     {
         if ($codEvento === null) {
-            return 'Chegou';
-
             $query = 'INSERT INTO evento ("titulo", "periodoinicial", "periodofinal", "inscricaoinicio", "inscricaofim", "qtdmininscrito", "qtdmaxinscrito", "modeldol") VALUES (';
             $query .= "'" . $titulo . "', '" . $periodoInicial . "', '" . $periodoFinal . "', '" . $inscricaoInicio . "', '" . $inscricaoFim . "', '" . $qtdMinInscrito . "', '" . $qtdMaxInscrito . "', '" . $modeloDoc . "');";
             app('db')->select($query);
+            return $query;
             $codEvento = app('db')->select('SELECT MAX(e.codevento) as "codEvento" FROM evento e;');
             $codEvento = json_decode(json_encode($codEvento), true);
             $codEvento = $codEvento[0]['codEvento'];
-            $insertAreaEvento = 'INSERT INTO areaevento ("codarea", "codevento") VALUES (' . $codArea[0]['codArea'] . ', ' . $codEvento . ');';
+            $insertAreaEvento = 'INSERT INTO areaevento ("codarea", "codevento") VALUES (' . $codArea['codArea'] . ', ' . $codEvento . ');';
             app('db')->select($insertAreaEvento);
             if (!empty($voluntario)) {
                 for ($v = 0; $v < count($voluntario); $v++) {
