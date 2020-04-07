@@ -219,7 +219,7 @@ $router->delete('/atividades/excluir/{codAtividade}', 'AtividadeController@exclu
 //Cadastrar
 $router->post('/eventos/cadastrar', function () {
     $body = dadosSessao();
-    $evento = new EventoController();
+    $res = $evento = new EventoController();
 
     try {
         $evento->gravarEvento(
@@ -240,7 +240,7 @@ $router->post('/eventos/cadastrar', function () {
         $response['erro'] = $e;
         return response($response, 400);
     }
-    return response('true', 200);
+    return response($res, 200);
 });
 
 //Listar Eventos
