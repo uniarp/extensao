@@ -29,7 +29,7 @@ class EventoController extends BaseController
                                     e.modeldol "modeloDoc"
                                 FROM evento e WHERE e.codevento = ' . $codEvento . ';');
         $evento['codArea'] = app('db')->select('SELECT ae.codarea "codArea", a.nome FROM areaevento ae JOIN area a ON ae.codarea = a.codarea
-            WHERE ae.codevento ='.$codArea.';');
+            WHERE ae.codevento ='.$codEvento.';');
         $evento['voluntario'] = app('db')->select('SELECT ep.codvoluntario "codVoluntario", v.nome, v.email, v.cpf, v.telefone, v.ra, v.curso FROM equipeevento ep
         JOIN voluntario v ON ep.codvoluntario = v.codvoluntario
         WHERE ep.codevento =' .$codEvento. ';');
