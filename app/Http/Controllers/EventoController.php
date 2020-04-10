@@ -35,8 +35,8 @@ class EventoController extends BaseController
             $evento[$e]['voluntario'] = app('db')->select('SELECT ep.codvoluntario "codVoluntario", v.nome, v.email, v.cpf, v.telefone, v.ra, v.curso FROM equipeevento ep
             JOIN voluntario v ON ep.codvoluntario = v.codvoluntario
             WHERE ep.codevento =' .$codEvento. ';');
-            $atividade = app('db')->select('SELECT atv.codatividade "codAtividade", atv.titulo, atv.codtipo, atv.datainicio,
-                atv.datafim, atv.localizacao, atv.descricao FROM atividade atv WHERE atv.codevento ='.$codEvento.';');
+            $atividade = app('db')->select('SELECT atv.codatividade "codAtividade", atv.titulo, atv.codtipo "codTipo", atv.datainicio "dataInicio",
+                atv.datafim "dataFim", atv.localizacao, atv.descricao FROM atividade atv WHERE atv.codevento ='.$codEvento.';');
             $atividade = json_decode(json_encode($atividade), true);
             for ($a = 0; $a < count($atividade); $a++) {
                 $codAtv = $atividade[$a]['codAtividade'];
