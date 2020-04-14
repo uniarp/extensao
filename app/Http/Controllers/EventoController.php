@@ -90,6 +90,8 @@ class EventoController extends BaseController
             $query = "UPDATE evento SET titulo = '" . $titulo . "', periodoinicial = '" . $periodoInicial . "', periodofinal = '" . $periodoFinal . "', inscricaoinicio = '"
                 . $inscricaoInicio . "', inscricaofim = '" . $inscricaoFim . "', qtdmininscrito = '" . $qtdMinInscrito . "', qtdmaxinscrito = '" . $qtdMaxInscrito
                 . "', modeldol = '" . $modeloDoc . "' WHERE codevento = '" . $codEvento . "';";
+
+            app('db')->select($query);
             return EventoController::listarEvento($codEvento);
         }
     }
