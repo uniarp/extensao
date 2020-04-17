@@ -10,13 +10,34 @@ class EventoController extends BaseController
 
     public function listarEventos()
     {
-        return app('db')->select('SELECT
+        $eventos = app('db')->select('SELECT
                                     e.codevento "codEvento", e.titulo,
                                     e.periodoinicial "periodoInicial", e.periodofinal "periodoFinal",
                                     e.inscricaoinicio "inscricaoInicio", e.inscricaofim "inscricaoFim",
                                     e.qtdmininscrito "qtdMinInscrito", e.qtdmaxinscrito "qtdMaxInscrito",
-                                    e.modeldol "modeloDoc"
+                                    e.modeldol "modeloDoc",
+                                    (SELECT COUNT(*) FROM participanteevento p WHERE p.codevento = e.codevento) "qtdInscritos",
+                                    (SELECT COUNT(*) FROM areaevento a WHERE a.codevento = e.codevento) "qtdArea",
+                                    (SELECT COUNT(*) FROM equipeevento ee WHERE ee.codevento = e.codevento) "qtdEquipe"
                                 FROM evento e;');
+        $i = 0;
+        foreach ($eventos as $evento) {
+            if ($evento['qtdInscritos'] === 0) {
+                if ($evento['qtdArea'] === 0) {
+                    if ($evento['qtdEquipe'] === 0) {
+                        $eventos[$i]['podeExcluir'] = true;
+                    } else {
+                        $eventos[$i]['podeExcluir'] = false;
+                    }
+                } else {
+                    $eventos[$i]['podeExcluir'] = false;
+                }
+            } else {
+                $eventos[$i]['podeExcluir'] = false;
+            }
+        }
+
+        return $eventos;
     }
 
     public function listarEvento($codEvento)
