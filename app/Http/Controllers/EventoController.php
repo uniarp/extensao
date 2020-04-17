@@ -20,6 +20,8 @@ class EventoController extends BaseController
                                     (SELECT COUNT(*) FROM areaevento a WHERE a.codevento = e.codevento) "qtdArea",
                                     (SELECT COUNT(*) FROM equipeevento ee WHERE ee.codevento = e.codevento) "qtdEquipe"
                                 FROM evento e;');
+
+        $eventos = json_decode(json_encode($eventos), true);
         $i = 0;
         foreach ($eventos as $evento) {
             if ($evento['qtdInscritos'] == 0) {
