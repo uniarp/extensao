@@ -22,9 +22,9 @@ class EventoController extends BaseController
                                 FROM evento e;');
         $i = 0;
         foreach ($eventos as $evento) {
-            if ($evento['qtdInscritos'] === 0) {
-                if ($evento['qtdArea'] === 0) {
-                    if ($evento['qtdEquipe'] === 0) {
+            if ($evento['qtdInscritos'] == 0) {
+                if ($evento['qtdArea'] == 0) {
+                    if ($evento['qtdEquipe'] == 0) {
                         $eventos[$i]['podeExcluir'] = true;
                     } else {
                         $eventos[$i]['podeExcluir'] = false;
@@ -35,6 +35,7 @@ class EventoController extends BaseController
             } else {
                 $eventos[$i]['podeExcluir'] = false;
             }
+            $i++;
         }
 
         return $eventos;
