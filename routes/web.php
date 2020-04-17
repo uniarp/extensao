@@ -71,13 +71,13 @@ $router->post('/voluntarios/cadastrar', function () {
     $voluntario = new VoluntarioController();
     try {
         $voluntario->gravarVoluntario(
-            $body['codVoluntario'],
-            $body['nome'],
-            $body['email'],
-            $body['cpf'],
-            $body['telefone'],
-            $body['ra'],
-            $body['curso']
+            $body['codVoluntario'] ? $body['codVoluntario'] : '',
+            $body['nome'] ? $body['nome'] : '',
+            $body['email'] ? $body['email'] : '',
+            $body['cpf'] ? $body['cpf'] : '',
+            $body['telefone'] ? $body['telefone'] : '',
+            $body['ra'] ? $body['ra'] : '',
+            $body['curso'] ? $body['curso'] : ''
         );
     } catch (Exception $e) {
         $response['erro'] = $e;
@@ -102,13 +102,13 @@ $router->post('/palestrantes/cadastrar', function () {
     $palestrante = new PalestranteController();
     try {
         $res = $palestrante->gravarPalestrante(
-            $body['codPalestrante'],
-            $body['nome'],
-            $body['cpf'],
-            $body['telefone'],
-            $body['email'],
-            $body['biografia'],
-            $body['area']
+            $body['codPalestrante'] ? $body['codPalestrante'] : '',
+            $body['nome'] ? $body['nome'] : '',
+            $body['cpf'] ? $body['cpf'] : '',
+            $body['telefone'] ? $body['telefone'] : '',
+            $body['email'] ? $body['email'] : '',
+            $body['biografia'] ? $body['biografia'] : '',
+            $body['area'] ? $body['area'] : ''
         );
     } catch (Exception $e) {
         $response['erro'] = $e;
@@ -134,13 +134,13 @@ $router->post('/participantes/cadastrar', function () {
 
     try {
         $response = $participante->gravarParticipante(
-            $body['codParticipante'],
-            $body['nome'],
-            $body['cpf'],
-            $body['ra'],
-            $body['senha'],
-            $body['telefone'],
-            $body['email']
+            $body['codParticipante'] ? $body['codParticipante'] : '',
+            $body['nome'] ? $body['nome'] : '',
+            $body['cpf'] ? $body['cpf'] : '',
+            $body['ra'] ? $body['ra'] : '',
+            $body['senha'] ? $body['senha'] : '',
+            $body['telefone'] ? $body['telefone'] : '',
+            $body['email'] ? $body['email'] : ''
         );
     } catch (Exception $e) {
         $response['erro'] = $e;
@@ -165,11 +165,11 @@ $router->post('/usuarios/cadastrar', function () {
 
     try {
         $usuario->cadastrarUsuario(
-            $body['codUsuario'],
-            $body['nome'],
-            $body['email'],
-            $body['cpf'],
-            $body['senha']
+            $body['codUsuario'] ? $body['codUsuario'] : '',
+            $body['nome'] ? $body['nome'] : '',
+            $body['email'] ? $body['email'] : '',
+            $body['cpf'] ? $body['cpf'] : '',
+            $body['senha'] ? $body['senha'] : ''
         );
     } catch (Exception $e) {
         $response['erro'] = $e;
@@ -194,14 +194,14 @@ $router->post('/atividades/cadastrar', function () {
 
     try {
         $res = $atividade->gravarAtividade(
-            $body['codAtividade'],
-            $body['titulo'],
-            $body['codTipo'],
-            $body['dataInicio'],
-            $body['dataFim'],
-            $body['localizacao'],
-            $body['descricao'],
-            $body['palestrante']
+            $body['codAtividade'] ? $body['codAtividade'] : '',
+            $body['titulo'] ? $body['titulo'] : '',
+            $body['codTipo'] ? $body['codTipo'] : '',
+            $body['dataInicio'] ? $body['dataInicio'] : '',
+            $body['dataFim'] ? $body['dataFim'] : '',
+            $body['localizacao'] ? $body['localizacao'] : '',
+            $body['descricao'] ? $body['descricao'] : '',
+            $body['palestrante'] ? $body['palestrante'] : ''
         );
     } catch (Exception $e) {
         $response['erro'] = $e;
@@ -223,18 +223,18 @@ $router->post('/eventos/cadastrar', function () {
 
     try {
         $res = $evento->gravarEvento(
-            $body['codEvento'],
-            $body['titulo'],
-            $body['codArea'],
-            $body['periodoInicial'],
-            $body['periodoFinal'],
-            $body['inscricaoInicio'],
-            $body['inscricaoFim'],
-            $body['qtdMinInscrito'],
-            $body['qtdMaxInscrito'],
-            $body['modeloDoc'],
-            $body['voluntario'],
-            $body['atividades']
+            $body['codEvento'] ? $body['codEvento'] : '',
+            $body['titulo'] ? $body['titulo'] : '',
+            $body['codArea'] ? $body['codArea'] : '',
+            $body['periodoInicial'] ? $body['periodoInicial'] : '',
+            $body['periodoFinal'] ? $body['periodoFinal'] : '',
+            $body['inscricaoInicio'] ? $body['inscricaoInicio'] : '',
+            $body['inscricaoFim'] ? $body['inscricaoFim'] : '',
+            $body['qtdMinInscrito'] ? $body['qtdMinInscrito'] : '',
+            $body['qtdMaxInscrito'] ? $body['qtdMaxInscrito'] : '',
+            $body['modeloDoc'] ? $body['modeloDoc'] : '',
+            $body['voluntario'] ? $body['voluntario'] : '',
+            $body['atividades'] ? $body['atividades'] : ''
         );
     } catch (Exception $e) {
         $response['erro'] = $e;
