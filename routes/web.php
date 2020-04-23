@@ -252,6 +252,10 @@ $router->get('/eventos/listar/{codEvento}', 'EventoController@listarEvento');
 //Excluir
 $router->delete('/eventos/excluir/{codEvento}', 'EventoController@excluirEvento');
 
+//Listar Inscritos
+$router->get('/eventos/listarInscritos/{codEvento}', 'EventoController@listarIncritos');
+
+
 function dadosSessao()
 {
     $request = new Request();

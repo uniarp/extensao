@@ -55,24 +55,23 @@ class EventoController extends BaseController
         $evento = json_decode(json_encode($evento), true);
         for ($e = 0; $e < count($evento); $e++) {
             $evento[$e]['codArea'] = app('db')->select('SELECT ae.codarea "codArea", a.nome FROM areaevento ae JOIN area a ON ae.codarea = a.codarea
-                WHERE ae.codevento ='.$codEvento.';');
+                WHERE ae.codevento =' . $codEvento . ';');
             $evento[$e]['voluntario'] = app('db')->select('SELECT ep.codvoluntario "codVoluntario", v.nome, v.email, v.cpf, v.telefone, v.ra, v.curso FROM equipeevento ep
             JOIN voluntario v ON ep.codvoluntario = v.codvoluntario
-            WHERE ep.codevento =' .$codEvento. ';');
+            WHERE ep.codevento =' . $codEvento . ';');
             $atividade = app('db')->select('SELECT atv.codatividade "codAtividade", atv.titulo, atv.codtipo "codTipo", ta.nome "nomeTipo", atv.datainicio "dataInicio",
                 atv.datafim "dataFim", atv.localizacao, atv.descricao FROM atividade atv
-                JOIN tipoatividade ta ON atv.codtipo = ta.codtipoatividade WHERE atv.codevento ='.$codEvento.';');
+                JOIN tipoatividade ta ON atv.codtipo = ta.codtipoatividade WHERE atv.codevento =' . $codEvento . ';');
             $atividade = json_decode(json_encode($atividade), true);
             for ($a = 0; $a < count($atividade); $a++) {
                 $codAtv = $atividade[$a]['codAtividade'];
                 $palestranteAtv = app('db')->select('SELECT ap.codatividadepalestrante "codAtividadePalestrante",ap.codpalestrante "codPalestrante", p.nome 
-                FROM atividadepalestrante ap JOIN palestrante p ON ap.codpalestrante = p.codpalestrante WHERE ap.codatividade ='.$codAtv.';');
+                FROM atividadepalestrante ap JOIN palestrante p ON ap.codpalestrante = p.codpalestrante WHERE ap.codatividade =' . $codAtv . ';');
                 $atividade[$a]['palestrante'] =  $palestranteAtv;
             }
             $evento[$e]['atividades'] = $atividade;
         }
         return $evento;
-
     }
 
     public function gravarEvento($codEvento, $titulo, $codArea, $periodoInicial, $periodoFinal, $inscricaoInicio, $inscricaoFim, $qtdMinInscrito, $qtdMaxInscrito, $modeloDoc, $voluntario, $atividades)
@@ -123,6 +122,14 @@ class EventoController extends BaseController
     public function excluirEvento($codEvento)
     {
         $query = "DELETE FROM evento WHERE codevento = '$codEvento'";
+        return app('db')->select($query);
+    }
+
+    public function listarIncritos($codEvento)
+    {
+        $query = 'SELECT p.codparticipante "codParticipante", p.nome, p.cpf, p.ra, p.telefone, p.email FROM participanteevento pe
+        JOIN participante p ON pe.codparticipante = p.codparticipante
+        WHERE pe.codevento =' . $codEvento . ';';
         return app('db')->select($query);
     }
 }
