@@ -71,7 +71,7 @@ $router->post('/voluntarios/cadastrar', function () {
     $voluntario = new VoluntarioController();
     try {
         $voluntario->gravarVoluntario(
-            $body['codVoluntario'] ? $body['codVoluntario'] : '',
+            $body['codVoluntario'] ? $body['codVoluntario'] : null,
             $body['nome'] ? $body['nome'] : '',
             $body['email'] ? $body['email'] : '',
             $body['cpf'] ? $body['cpf'] : '',
@@ -102,7 +102,7 @@ $router->post('/palestrantes/cadastrar', function () {
     $palestrante = new PalestranteController();
     try {
         $res = $palestrante->gravarPalestrante(
-            $body['codPalestrante'] ? $body['codPalestrante'] : '',
+            $body['codPalestrante'] ? $body['codPalestrante'] : null,
             $body['nome'] ? $body['nome'] : '',
             $body['cpf'] ? $body['cpf'] : '',
             $body['telefone'] ? $body['telefone'] : '',
@@ -134,7 +134,7 @@ $router->post('/participantes/cadastrar', function () {
 
     try {
         $response = $participante->gravarParticipante(
-            $body['codParticipante'] ? $body['codParticipante'] : '',
+            $body['codParticipante'] ? $body['codParticipante'] : null,
             $body['nome'] ? $body['nome'] : '',
             $body['cpf'] ? $body['cpf'] : '',
             $body['ra'] ? $body['ra'] : '',
@@ -194,7 +194,7 @@ $router->post('/atividades/cadastrar', function () {
 
     try {
         $res = $atividade->gravarAtividade(
-            $body['codAtividade'] ? $body['codAtividade'] : '',
+            $body['codAtividade'] ? $body['codAtividade'] : null,
             $body['titulo'] ? $body['titulo'] : '',
             $body['codTipo'] ? $body['codTipo'] : '',
             $body['dataInicio'] ? $body['dataInicio'] : '',
@@ -223,7 +223,7 @@ $router->post('/eventos/cadastrar', function () {
 
     try {
         $res = $evento->gravarEvento(
-            $body['codEvento'] ? $body['codEvento'] : '',
+            $body['codEvento'] ? $body['codEvento'] : null,
             $body['titulo'] ? $body['titulo'] : '',
             $body['codArea'] ? $body['codArea'] : '',
             $body['periodoInicial'] ? $body['periodoInicial'] : '',
