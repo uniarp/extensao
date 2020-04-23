@@ -165,7 +165,7 @@ $router->post('/usuarios/cadastrar', function () {
 
     try {
         $usuario->cadastrarUsuario(
-            $body['codUsuario'] ? $body['codUsuario'] : '',
+            $body['codUsuario'] ? $body['codUsuario'] : null,
             $body['nome'] ? $body['nome'] : '',
             $body['email'] ? $body['email'] : '',
             $body['cpf'] ? $body['cpf'] : '',
