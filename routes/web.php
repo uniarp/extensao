@@ -270,7 +270,7 @@ $router->post('/eventos/inscrever', function () {
 });
 
 //Listar Inscritos e Participantes para Escrever no Evento
-$router->delete('/eventos/participantesevento/{codEvento}', 'EventoController@participantesInscreverEvento');
+$router->get('/eventos/participantesevento/{codEvento}', 'EventoController@participantesInscreverEvento');
 
 function dadosSessao()
 {
