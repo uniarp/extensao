@@ -155,6 +155,6 @@ class EventoController extends BaseController
             $participante['relacionado'] = $participante['relacionado'] ? true : false;
         }
 
-        return $participante;
+        return $participantes;
     }
 }
