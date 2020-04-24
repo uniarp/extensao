@@ -263,7 +263,7 @@ $router->post('/eventos/inscrever', function () {
     try {
         $res = $evento->inscreverParticipanteEvento($body['participanteEventos']);
     } catch (Exception $e) {
-        $response['erro'] = $e;
+        $response['erro'] = $e->getMessage();
         return response($response, 400);
     }
     return response($res, 200);
