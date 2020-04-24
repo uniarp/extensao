@@ -255,6 +255,19 @@ $router->delete('/eventos/excluir/{codEvento}', 'EventoController@excluirEvento'
 //Listar Inscritos
 $router->get('/eventos/listarInscritos/{codEvento}', 'EventoController@listarIncritos');
 
+//Inscrever Participante Evento
+$router->post('/eventos/inscrever', function () {
+    $body = dadosSessao();
+    $evento = new EventoController();
+
+    try {
+        $res = $evento->inscreverParticipanteEvento($body['participanteEventos']);
+    } catch (Exception $e) {
+        $response['erro'] = $e;
+        return response($response, 400);
+    }
+    return response($res, 200);
+});
 
 function dadosSessao()
 {

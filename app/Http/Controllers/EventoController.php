@@ -132,4 +132,12 @@ class EventoController extends BaseController
         WHERE pe.codevento =' . $codEvento . ';';
         return app('db')->select($query);
     }
+
+    public function inscreverParticipanteEvento($arrDados)
+    {
+        foreach ($arrDados as $dado) {
+            $query = "INSERT INTO participanteevento (codparticipante, codevento) VALUES ('{$dado['codParticipante']}', '{$dado['codEvento']}');";
+            return app('db')->select($query);
+        }
+    }
 }
