@@ -141,4 +141,20 @@ class EventoController extends BaseController
             app('db')->select($query);
         }
     }
+
+    public function participantesInscreverEvento($codEvento)
+    {
+        $query = 'SELECT COALESCE(t2.codparticipanteevento, NULL) relacionado, t1.codparticipante "codParticipante", t1.nome                            
+        FROM participante t1
+        LEFT JOIN participanteevento t2 ON t1.codparticipante = t2.codparticipante AND t2.codevento = ' . $codEvento . ';';
+
+        $participantes = app('db')->select($query);
+        $participantes = json_decode(json_encode($participantes), true);
+
+        foreach ($participantes as &$participante) {
+            $participante['relacionado'] = $participante['relacionado'] ? true : false;
+        }
+
+        return $participante;
+    }
 }

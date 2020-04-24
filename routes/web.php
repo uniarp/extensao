@@ -269,6 +269,9 @@ $router->post('/eventos/inscrever', function () {
     return response($res, 200);
 });
 
+//Listar Inscritos e Participantes para Escrever no Evento
+$router->delete('/eventos/participantesevento/{codEvento}', 'EventoController@participantesInscreverEvento');
+
 function dadosSessao()
 {
     $request = new Request();
