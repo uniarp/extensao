@@ -261,7 +261,7 @@ $router->post('/eventos/inscrever', function () {
     $evento = new EventoController();
 
     try {
-        $res = $evento->inscreverParticipanteEvento($body['participanteEventos']);
+        $res = $evento->inscreverParticipanteEvento($body);
     } catch (Exception $e) {
         $response['erro'] = $e->getMessage();
         return response($response, 400);
