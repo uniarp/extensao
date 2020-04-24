@@ -135,6 +135,7 @@ class EventoController extends BaseController
 
     public function inscreverParticipanteEvento($arrDados)
     {
+        $arrDados = json_decode(json_encode($arrDados), true);
         foreach ($arrDados as $dado) {
             $query = "INSERT INTO participanteevento (codparticipante, codevento) VALUES ('{$dado['codParticipante']}', '{$dado['codEvento']}');";
             return app('db')->select($query);
