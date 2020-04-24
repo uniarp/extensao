@@ -266,7 +266,7 @@ $router->post('/eventos/inscrever', function () {
         $response['erro'] = $e;
         return response($response, 400);
     }
-    return response($res, 200);
+    return response('Ok', 200);
 });
 
 function dadosSessao()
