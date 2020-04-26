@@ -127,10 +127,22 @@ class EventoController extends BaseController
 
     public function listarIncritos($codEvento)
     {
-        $query = 'SELECT p.codparticipante "codParticipante", p.nome, p.cpf, p.ra, p.telefone, p.email FROM participanteevento pe
+        $query = 'SELECT p.codparticipante "codParticipante", pe.codevento "codEvento", p.nome, p.cpf, p.ra, p.telefone, p.email, pe.presente FROM participanteevento pe
         JOIN participante p ON pe.codparticipante = p.codparticipante
-        WHERE pe.codevento =' . $codEvento . ';';
+        WHERE pe.codevento = ' . $codEvento . ';';
         return app('db')->select($query);
+    }
+
+    public function salvarPresenca($arrDados)
+    {
+        $arrDados = json_decode(json_encode($arrDados), true);
+        if (is_array($arrDados)) {
+            foreach ($arrDados as $dado) {
+                $query = "UPDATE participanteevento PE SET PE.presente = {$dado['presente']}
+                          WHERE PE.codparticipante = {$dado['codParticipante']} AND PE.codevento = {$dado['codEvento']}";
+                app('db')->select($query);
+            }
+        }
     }
 
     public function inscreverParticipanteEvento($arrDados)

@@ -269,6 +269,20 @@ $router->post('/eventos/inscrever', function () {
     return response($res, 200);
 });
 
+//Inscrever Participante Evento
+$router->post('/eventos/presenca', function () {
+    $body = dadosSessao();
+    $evento = new EventoController();
+
+    try {
+        $res = $evento->salvarPresenca($body);
+    } catch (Exception $e) {
+        $response['erro'] = $e->getMessage();
+        return response($response, 400);
+    }
+    return response($res, 200);
+});
+
 //Listar Inscritos e Participantes para Escrever no Evento
 $router->get('/eventos/participantesevento/{codEvento}', 'EventoController@participantesInscreverEvento');
 
