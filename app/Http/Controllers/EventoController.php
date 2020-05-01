@@ -127,7 +127,7 @@ class EventoController extends BaseController
 
     public function listarIncritos($codEvento)
     {
-        $query = 'SELECT p.codparticipante "codParticipante", pe.codevento "codEvento", p.nome, p.cpf, p.ra, p.telefone, p.email, COALESCE(pe.presente, false) FROM participanteevento pe
+        $query = 'SELECT p.codparticipante "codParticipante", pe.codevento "codEvento", p.nome, p.cpf, p.ra, p.telefone, p.email, COALESCE(pe.presente, false) presente FROM participanteevento pe
         JOIN participante p ON pe.codparticipante = p.codparticipante
         WHERE pe.codevento = ' . $codEvento . ';';
         return app('db')->select($query);
