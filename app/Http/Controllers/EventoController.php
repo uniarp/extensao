@@ -139,7 +139,7 @@ class EventoController extends BaseController
         if (is_array($arrDados)) {
             foreach ($arrDados as $dado) {
                 $presenca = $dado['presente'] ? 'true' : 'false';
-                $query = "UPDATE participanteevento PE SET PE.presente = $presenca WHERE PE.codparticipante = {$dado['codParticipante']} AND PE.codevento = {$dado['codEvento']};";
+                $query = "UPDATE participanteevento PE SET PE.presente = '$presenca' WHERE PE.codparticipante = {$dado['codParticipante']} AND PE.codevento = {$dado['codEvento']};";
                 app('db')->select($query);
             }
         }
