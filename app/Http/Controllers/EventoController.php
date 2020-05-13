@@ -149,7 +149,7 @@ class EventoController extends BaseController
     {
         $arrDados = json_decode(json_encode($arrDados), true);
         if (is_array($arrDados)) {
-            app('db')->select("DELETE FROM participanteevento WHERE codevento = {$arrDados[0]['codEvento']}");
+            // app('db')->select("DELETE FROM participanteevento WHERE codevento = {$arrDados[0]['codEvento']}");
             foreach ($arrDados as $dado) {
                 $query = "INSERT INTO participanteevento (codparticipante, codevento) VALUES ('{$dado['codParticipante']}', '{$dado['codEvento']}');";
                 app('db')->select($query);
