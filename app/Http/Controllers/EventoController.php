@@ -110,6 +110,13 @@ class EventoController extends BaseController
                 $insetVolun = 'INSERT INTO equipeevento ("codvoluntario", "codevento") VALUES (' . $codVoluntario . ', ' . $codEvento . ');';
                 app('db')->select($insetVolun);
             }
+            $delEquipe = 'DELETE FROM atividade  WHERE codevento = ' . $codEvento . ';';
+            for ($a = 0; $a < count($atividades); $a++) {
+                $codAtividade = $atividades[$a]['codAtividade'];
+                $updateAtividade = 'UPDATE atividade SET "codevento"= ' . $codEvento . ' WHERE  "codatividade"=' . $codAtividade . ';';
+                app('db')->select($updateAtividade);
+            }
+
             $query = "UPDATE evento SET titulo = '" . $titulo . "', periodoinicial = '" . $periodoInicial . "', periodofinal = '" . $periodoFinal . "', inscricaoinicio = '"
                 . $inscricaoInicio . "', inscricaofim = '" . $inscricaoFim . "', qtdmininscrito = '" . $qtdMinInscrito . "', qtdmaxinscrito = '" . $qtdMaxInscrito
                 . "', modeldol = '" . $modeloDoc . "' WHERE codevento = '" . $codEvento . "';";
