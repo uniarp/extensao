@@ -153,7 +153,7 @@ class EventoController extends BaseController
             foreach ($arrDados as $dado) {
                 $query = "INSERT INTO participanteevento (codparticipante, codevento) VALUES ('{$dado['codParticipante']}', '{$dado['codEvento']}');";
                 app('db')->select($query);
-                foreach ($dado as $d) {
+                foreach ($dado['atividades'] as $d) {
                     $inscAtv = "INSERT INTO participanteatividade (codparticipante, codatividade) 
                     VALUES (".$dado['codParticipante']."," .$d['codAtividade'].");";
                     app('db')->select($inscAtv);
