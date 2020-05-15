@@ -171,7 +171,7 @@ class EventoController extends BaseController
 
     public function participantesInscreverEvento($codEvento)
     {
-        $query = 'SELECT COALESCE(t2.codparticipanteevento, NULL) relacionado, t1.codparticipante "codParticipante", t1.nome                            
+        $query = 'SELECT COALESCE(t2.codparticipanteevento, NULL) relacionado, t1.codparticipante "codParticipante", t1.nome, t1.cpf, t1.ra, t1.telefone, t1.email
         FROM participante t1
         LEFT JOIN participanteevento t2 ON t1.codparticipante = t2.codparticipante AND t2.codevento = ' . $codEvento . ';';
 
