@@ -152,6 +152,9 @@ $router->post('/participantes/cadastrar', function () {
 //Excluir
 $router->delete('/participantes/excluir/{codParticipante}', 'ParticipanteController@excluirParticipante');
 
+//LISTAR EVENTO PARTICIPANTE
+$router->get('/participantes/eventos/{cpf}', 'ParticipanteController@listarEventos');
+
 /* USUÁRIO */
 //Listar
 $router->get('/usuarios/listar', 'UsuarioController@listarUsuarios');
