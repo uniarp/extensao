@@ -15,7 +15,7 @@ class EventoController extends BaseController
                                     e.periodoinicial "periodoInicial", e.periodofinal "periodoFinal",
                                     e.inscricaoinicio "inscricaoInicio", e.inscricaofim "inscricaoFim",
                                     e.qtdmininscrito "qtdMinInscrito", e.qtdmaxinscrito "qtdMaxInscrito",
-                                    e.modeldol "modeloDoc",
+                                    e.modeldol "modeloDoc", e.status,
                                     (SELECT COUNT(*) FROM participanteevento p WHERE p.codevento = e.codevento) "qtdInscritos",
                                     (SELECT COUNT(*) FROM areaevento a WHERE a.codevento = e.codevento) "qtdArea",
                                     (SELECT COUNT(*) FROM equipeevento ee WHERE ee.codevento = e.codevento) "qtdEquipe"
@@ -50,7 +50,7 @@ class EventoController extends BaseController
                                     e.periodoinicial "periodoInicial", e.periodofinal "periodoFinal",
                                     e.inscricaoinicio "inscricaoInicio", e.inscricaofim "inscricaoFim",
                                     e.qtdmininscrito "qtdMinInscrito", e.qtdmaxinscrito "qtdMaxInscrito",
-                                    e.modeldol "modeloDoc"
+                                    e.modeldol "modeloDoc", e.status,
                                 FROM evento e WHERE e.codevento = ' . $codEvento . ';');
         $evento = json_decode(json_encode($evento), true);
         for ($e = 0; $e < count($evento); $e++) {
