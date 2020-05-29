@@ -31,11 +31,11 @@ class ParticipanteController extends BaseController {
         return app('db')->select($query);
     }
 
-    public function listarEventos($cpf) {
+    public function listarEventos($codParticipante) {
         $query = "SELECT pe.codevento, pe.codparticipante, e.titulo, p.nome, pe.presente FROM participanteevento pe
             LEFT JOIN evento e ON pe.codevento = e.codevento
             LEFT JOIN participante p ON pe.codparticipante = p.codparticipante
-            WHERE pe.codparticipante IN(SELECT p.codparticipante FROM participante p WHERE p.cpf = '$cpf');";
+            WHERE pe.codparticipante IN(SELECT p.codparticipante FROM participante p WHERE pe.codparticipante = '$codParticipante');";
         return app('db')->select($query);
     }
 }

@@ -153,7 +153,7 @@ $router->post('/participantes/cadastrar', function () {
 $router->delete('/participantes/excluir/{codParticipante}', 'ParticipanteController@excluirParticipante');
 
 //LISTAR EVENTO PARTICIPANTE
-$router->get('/participantes/eventos/{cpf}', 'ParticipanteController@listarEventos');
+$router->get('/participantes/eventos/{codParticipante}', 'ParticipanteController@listarEventos');
 
 /* USUÁRIO */
 //Listar
@@ -272,7 +272,10 @@ $router->post('/eventos/inscrever', function () {
     return response($res, 200);
 });
 
-//Inscrever Participante Evento
+//Remover Inscrito
+$router->get('/eventos/removerInscrito/{codParticipanteEvento}', 'EventoController@removerInscricaoParticipanteEvento');
+
+//Presença Participante Evento
 $router->post('/eventos/presenca', function () {
     $body = dadosSessao();
     $evento = new EventoController();

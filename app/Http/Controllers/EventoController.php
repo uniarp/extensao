@@ -134,7 +134,7 @@ class EventoController extends BaseController
 
     public function listarIncritos($codEvento)
     {
-        $query = 'SELECT p.codparticipante "codParticipante", pe.codevento "codEvento", p.nome, p.cpf, p.ra, p.telefone, p.email, COALESCE(pe.presente, false) presente FROM participanteevento pe
+        $query = 'SELECT pe.codparticipanteevento "codParticipanteEvento", p.codparticipante "codParticipante", pe.codevento "codEvento", p.nome, p.cpf, p.ra, p.telefone, p.email, COALESCE(pe.presente, false) presente FROM participanteevento pe
         JOIN participante p ON pe.codparticipante = p.codparticipante
         WHERE pe.codevento = ' . $codEvento . ';';
         return app('db')->select($query);
@@ -183,5 +183,10 @@ class EventoController extends BaseController
         }
 
         return $participantes;
+    }
+
+    public function removerInscricaoParticipanteEvento($codParticipanteEvento)
+    {
+        app('db')->select("DELETE FROM participanteevento WHERE codparticipanteevento = '$codParticipanteEvento'");
     }
 }
