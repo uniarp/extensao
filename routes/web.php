@@ -273,7 +273,7 @@ $router->post('/eventos/inscrever', function () {
 });
 
 //Remover Inscrito
-$router->get('/eventos/removerInscrito/{codParticipanteEvento}', 'EventoController@removerInscricaoParticipanteEvento');
+$router->delete('/eventos/removerInscrito/{codParticipanteEvento}', 'EventoController@removerInscricaoParticipanteEvento');
 
 //Presença Participante Evento
 $router->post('/eventos/presenca', function () {
