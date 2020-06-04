@@ -49,11 +49,11 @@ class ParticipanteController extends BaseController
     public function gerarQrCode($codEvento)
     {
         $url = "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" . $codEvento;
-        try {
-            $qrCode = file_get_contents($url);
-            return ['qrCode' => base64_encode($qrCode)];
-        } catch (Exception $e) {
-            return ['erro' => $e->getMessage()];
-        }
+
+        $cURLConnection = curl_init($url);
+        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+        $apiResponse = curl_exec($cURLConnection);
+        curl_close($cURLConnection);
+        return ['qrCode' => base64_encode($apiResponse)];
     }
 }
