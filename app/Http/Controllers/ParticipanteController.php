@@ -48,7 +48,7 @@ class ParticipanteController extends BaseController
 
     public function gerarQrCode($codEvento)
     {
-        $url = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=Evento: " . $codEvento;
+        $url = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=Evento:%20" . $codEvento;
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec($ch);
