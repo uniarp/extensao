@@ -54,6 +54,6 @@ class ParticipanteController extends BaseController
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec($ch);
         curl_close($ch);
-        return ['qrCode' => base64_encode($output)];
+        return ['qrCode' => $output];
     }
 }
