@@ -155,6 +155,9 @@ $router->delete('/participantes/excluir/{codParticipante}', 'ParticipanteControl
 //LISTAR EVENTO PARTICIPANTE
 $router->get('/participantes/eventos/{codParticipante}', 'ParticipanteController@listarEventos');
 
+// Gerar QR Code
+$router->get('/participantes/qrCode/{codEvento}', 'ParticipanteController@gerarQrCode');
+
 /* USUÁRIO */
 //Listar
 $router->get('/usuarios/listar', 'UsuarioController@listarUsuarios');
