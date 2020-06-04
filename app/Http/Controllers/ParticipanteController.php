@@ -50,10 +50,13 @@ class ParticipanteController extends BaseController
     {
         $url = "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" . $codEvento;
 
-        $cURLConnection = curl_init($url);
+        $cURLConnection = curl_init();
+
+        curl_setopt($cURLConnection, CURLOPT_URL, $url);
         curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
         $apiResponse = curl_exec($cURLConnection);
         curl_close($cURLConnection);
+
         return ['qrCode' => base64_encode($apiResponse)];
     }
 }
