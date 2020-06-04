@@ -48,19 +48,9 @@ class ParticipanteController extends BaseController
 
     public function gerarQrCode($codEvento)
     {
-        $data = array(
-            "frame_name" => "no-frame",
-            "qr_code_text" => "Evento: " . $codEvento,
-            "image_format" => "SVG",
-            "qr_code_logo" => "scan-me-square"
-        );
-        $payload = json_encode($data);
-
-        $url = "https://api.qr-code-generator.com/v1/create/";
+        $url = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=Evento: " . $codEvento;
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         $output = curl_exec($ch);
         curl_close($ch);
         return base64_encode($output);
