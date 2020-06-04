@@ -51,7 +51,7 @@ class ParticipanteController extends BaseController
         $data = array(
             "frame_name" => "no-frame",
             "qr_code_text" => "Evento: " . $codEvento,
-            "image_format" => "base64",
+            "image_format" => "SVG",
             "qr_code_logo" => "scan-me-square"
         );
         $payload = json_encode($data);
@@ -63,6 +63,6 @@ class ParticipanteController extends BaseController
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         $output = curl_exec($ch);
         curl_close($ch);
-        return $output;
+        return base64_encode($output);
     }
 }
