@@ -7,6 +7,7 @@ use \App\Http\Controllers\PalestranteController;
 use \App\Http\Controllers\VoluntarioController;
 use \App\Http\Controllers\AtividadeController;
 use \App\Http\Controllers\EventoController;
+use \App\Http\Controllers\DocumentoController;
 use \Illuminate\Http\ResponseResponseResponseSymfony\Component\HttpFoundation\Response;
 
 $router->get('testeconte', function () use ($router) {
@@ -126,6 +127,9 @@ $router->delete('/palestrantes/excluir/{codPalestrante}', 'PalestranteController
 $router->get('/participantes/listar/', 'ParticipanteController@listarParticipantes');
 
 $router->get('/participantes/listar/{codParticipante}', 'ParticipanteController@listarParticipante');
+
+//Listar dados Inscrição
+$router->get('/participantes/inscricao/{codInscricao}', 'ParticipanteController@dadosParaDoc');
 
 //Cadastrar
 $router->post('/participantes/cadastrar', function () {
@@ -294,6 +298,13 @@ $router->post('/eventos/presenca', function () {
 
 //Listar Inscritos e Participantes para Escrever no Evento
 $router->get('/eventos/participantesevento/{codEvento}', 'EventoController@participantesInscreverEvento');
+
+/* DOCUMENTOS */
+//Gerar Certificado
+$router->post('/documento/gerarcertificado/{codInscricao}', 'DocumentoController@emitirCertificado');
+
+//Validar Documento
+$router->get('/documento/validar/{token}', 'DocumentoController@validarDocumento');
 
 function dadosSessao()
 {
