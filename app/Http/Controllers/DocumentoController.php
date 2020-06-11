@@ -17,7 +17,7 @@ class DocumentoController extends BaseController
     public function validarDocumento($token)
     {
         $ret = app('db')->select("SELECT * FROM participanteevento pe WHERE pe.token = '$token';");
-        if (is_array($ret)) {
+        if (count($ret) > 0){
             return 'Certificado Válido';
         } else {
             return 'Certificado não é Válido';
