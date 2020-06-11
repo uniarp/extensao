@@ -11,7 +11,7 @@ class DocumentoController extends BaseController
     public function emitirCertificado($codInscricao)
     {
         $token = sha1(time() . $codInscricao);
-        app('db')->select("UPDATE participanteevento pe SET pe.token = $token WHERE pe.codparticipanteevento = '$codInscricao';");
+        app('db')->select("UPDATE participanteevento SET token = $token WHERE codparticipanteevento = '$codInscricao';");
     }
 
     public function validarDocumento($token)
