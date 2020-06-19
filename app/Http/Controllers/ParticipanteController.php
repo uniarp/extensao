@@ -53,7 +53,7 @@ class ParticipanteController extends BaseController
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec($ch);
         curl_close($ch);
-        return 'data:image/png;base64, ' . base64_encode($output);
+        return ['base64' => 'data:image/png;base64, ' . base64_encode($output)];
     }
 
     public function dadosParaDoc($codInscricao)
