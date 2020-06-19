@@ -39,7 +39,7 @@ class ParticipanteController extends BaseController
 
     public function listarEventos($codParticipante)
     {
-        $query = "SELECT pe.codevento, pe.codparticipante, e.titulo, p.nome, pe.presente FROM participanteevento pe
+        $query = "SELECT pe.codparticipanteevento, pe.codevento, pe.codparticipante, e.titulo, p.nome, pe.presente FROM participanteevento pe
             LEFT JOIN evento e ON pe.codevento = e.codevento
             LEFT JOIN participante p ON pe.codparticipante = p.codparticipante
             WHERE pe.codparticipante IN(SELECT p.codparticipante FROM participante p WHERE pe.codparticipante = '$codParticipante');";
