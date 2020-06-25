@@ -128,6 +128,8 @@ $router->get('/participantes/listar/', 'ParticipanteController@listarParticipant
 
 $router->get('/participantes/listar/{codParticipante}', 'ParticipanteController@listarParticipante');
 
+$router->get('/participantes/vericaEmail/{email}', 'ParticipanteController@verificaEmail');
+
 //Listar dados Inscrição
 $router->get('/participantes/inscricao/{codInscricao}', 'ParticipanteController@dadosParaDoc');
 

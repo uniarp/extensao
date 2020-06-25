@@ -19,6 +19,11 @@ class ParticipanteController extends BaseController
         return app('db')->select('SELECT p.codparticipante "codParticipante", p.nome, p.cpf, p.ra, p.telefone, p.email FROM participante p WHERE p.codparticipante = ' . $codParticipante . ';');
     }
 
+    public function verificaEmail($email)
+    {
+        return app('db')->select('SELECT p.codparticipante "codParticipante", p.nome, p.cpf, p.ra, p.telefone, p.email FROM participante p WHERE p.email = ' . $email . ';');
+    }
+
     public function gravarParticipante($codParticipante, $nome, $cpf, $ra, $senha, $telefone, $email)
     {
         if ($codParticipante === null) {
