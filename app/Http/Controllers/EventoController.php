@@ -168,7 +168,7 @@ class EventoController extends BaseController
                                 DATE_PART('day', a.datainicio::TIMESTAMP - a.datafim::timestamp) * 24 + 
                                 DATE_PART('hour', a.datainicio::timestamp - a.datafim::TIMESTAMP) AS tempo,
                                 (SELECT p.codparticipanteevento FROM participanteevento p
-                                WHERE p.codevento = '{$dado['codEvento']}' AND p.codparticipante = '{$dado['codParticipante']}') AS cod
+                                WHERE p.codevento = '{$dado['codEvento']}' AND p.codparticipante = '{$dado['codParticipante']}' LIMIT 1) AS cod
                             FROM atividade a WHERE a.codatividade = " . $d['codAtividade'] . ";";
                     $dados = app('db')->select($sql);
                     $sql = "UPDATE participanteevento p SET totalhoras = " . $dados[0]['tempo'] * -1 . " WHERE p.codparticipanteevento = " . $dados[0]['cod'];
