@@ -171,6 +171,7 @@ class EventoController extends BaseController
                                 WHERE p.codevento = '{$dado['codEvento']}' AND p.codparticipante = '{$dado['codParticipante']}' LIMIT 1) AS cod
                             FROM atividade a WHERE a.codatividade = " . $d['codAtividade'] . ";";
                     $dados = app('db')->select($sql);
+                    $dados = json_decode(json_encode($dados), true);
                     $sql = "UPDATE participanteevento p SET totalhoras = " . $dados[0]['tempo'] * -1 . " WHERE p.codparticipanteevento = " . $dados[0]['cod'];
                     app('db')->select($sql);
                 }
