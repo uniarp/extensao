@@ -10,8 +10,14 @@ class DocumentoController extends BaseController
 {
     public function emitirCertificado($codInscricao)
     {
-        $token = sha1(time() . $codInscricao);
-        app('db')->select("UPDATE participanteevento SET token = '$token' WHERE codparticipanteevento = '$codInscricao';");
+        $token = app('db')->select("SELECT p.token FROM participanteevento p WHERE p.codparticipanteevento = '$codInscricao';");
+        if ($token[0]['token'] == '') {
+            $dtAtual = date("Y-m-d");
+            $token = sha1(time() . $codInscricao);
+            app('db')->select("UPDATE participanteevento SET token = '$token', dataemissao = '$dtAtual'  WHERE codparticipanteevento = '$codInscricao';");
+        } else {
+            return 'Certificado Já foi Emitido';
+        }
     }
 
     public function validarDocumento($token)

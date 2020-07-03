@@ -156,7 +156,6 @@ class EventoController extends BaseController
     {
         $arrDados = json_decode(json_encode($arrDados), true);
         if (is_array($arrDados)) {
-            // app('db')->select("DELETE FROM participanteevento WHERE codevento = {$arrDados[0]['codEvento']}");
             foreach ($arrDados as $dado) {
                 $query = "INSERT INTO participanteevento (codparticipante, codevento) VALUES ('{$dado['codParticipante']}', '{$dado['codEvento']}');";
                 app('db')->select($query);
@@ -164,6 +163,16 @@ class EventoController extends BaseController
                     $inscAtv = "INSERT INTO participanteatividade (codparticipante, codatividade) 
                     VALUES (".$dado['codParticipante']."," .$d['codAtividade'].");";
                     app('db')->select($inscAtv);
+
+                    $sql = "SELECT
+                                DATE_PART('day', a.datainicio::TIMESTAMP - a.datafim::timestamp) * 24 + 
+                                DATE_PART('hour', a.datainicio::timestamp - a.datafim::TIMESTAMP) AS tempo,
+                                (SELECT p.codparticipanteevento FROM participanteevento p
+                                WHERE p.codevento = '{$dado['codEvento']}' AND p.codparticipante = '{$dado['codParticipante']}') AS cod
+                            FROM atividade a WHERE a.codatividade = " . $d['codAtividade'] . ";";
+                    $dados = app('db')->select($sql);
+                    $sql = "UPDATE participanteevento p SET totalhoras = " . $dados[0]['tempo'] * -1 . " WHERE p.codparticipanteevento = " . $dados[0]['cod'];
+                    app('db')->select($sql);
                 }
             }
         }
@@ -188,5 +197,10 @@ class EventoController extends BaseController
     public function removerInscricaoParticipanteEvento($codParticipanteEvento)
     {
         app('db')->select("DELETE FROM participanteevento WHERE codparticipanteevento = '$codParticipanteEvento'");
+    }
+
+    public function cancelarEvento($codEvento)
+    {
+        app('db')->select("UPDATE evento SET status = '2'  WHERE codevento = '$codEvento';");
     }
 }
