@@ -64,7 +64,7 @@ class ParticipanteController extends BaseController
     public function dadosParaDoc($codInscricao)
     {
         return app('db')->select('SELECT p.nome "nomeParticipante", p.cpf, e.titulo "nomeEvento", e.periodoinicial "periodoInicial",
-            e.periodofinal "periodoFinal", pe.token FROM participante p
+            e.periodofinal "periodoFinal", pe.token, pe.totalhoras "totalHoras" FROM participante p
             LEFT JOIN participanteevento pe ON pe.codparticipante = p.codparticipante
             LEFT JOIN evento e ON e.codevento = pe.codevento
             WHERE pe.codparticipanteevento = ' . $codInscricao);
