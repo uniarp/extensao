@@ -202,6 +202,6 @@ class EventoController extends BaseController
 
     public function cancelarEvento($codEvento)
     {
-        app('db')->select("UPDATE evento SET status = '2'  WHERE codevento = '$codEvento';");
+        app('db')->select("UPDATE evento SET status = '6'  WHERE codevento = '$codEvento';");
     }
 }
