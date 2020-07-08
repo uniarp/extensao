@@ -24,7 +24,7 @@ class DocumentoController extends BaseController
     {
         $ret = app('db')->select("SELECT * FROM participanteevento pe WHERE pe.token = '$token';");
         if (count($ret) > 0){
-            return 'Certificado Válido';
+            return $ret;
         } else {
             return 'Certificado não é Válido';
         }
